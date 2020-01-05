@@ -5,17 +5,16 @@ script:
 - cd minsky-one && mvn package; export MAVEN_RESULT=$?
 - if [ "$MAVEN_RESULT" -ne 0 ]; then exit 1; fi
 before_deploy:
-  - tar czvf /home/travis/install.tar.gz install
+- tar czvf /home/travis/install.tar.gz install
 deploy:
   provider: releases
   api_key:
-    secure: X
+    secure: n2ix5/pwrQiIUw0qb53kMod5mOo3Xc+jFN1iocSVP71gcYsY8w/LpYK3KO4re6+yq64vdu416rKVwHUW96ap0a22oqF8n9p3CebFRqsEYD865QO1QBRCXjWrVmkz9ZWa59GRxhIFdK26Gn59UKXsP34Ee1JmjK2JSbB7HGrk9rH7GokZd2v8ytkrqRDig7kySCdgknzSIt0f/wN6MCLkEOe4psBSIgEF6EakxSukc1sXVWma/jNUhF6x5F9SE3n5aEQ26Vz7n7LCTLuKNcSbbyjlzihG0PWlS5VzRbdGfpHXdTb4s2OSkBNbBoUtTsVPMfKgMGHfzquzZUcMFwuxCrA+M0884ddHzstA0DT5vU9+AQrGchWTlVnoBmAh4SkXGFg0NPgmrwxyeVLf3nu+6u6DQdAifY7op4HluMvmgjQCXNQf0ZoGzX0I6zLAov1lwbcrWSrB0PSACa259Wec3fn3ZuNos+Keuh3O9yWxPxrTsuVQENDztOxijKiETm7N7wRYd+WTSALQyxJHQG23oM+IJoPxVq/Ljv7vfMM8gTisqwsyZdl37lCoVvsfuMKfa3MlXA/tu533AqlVThqE5zWdn4AWK2L8ucbI89BophXxMX7atPEaQHg2bNdpWGxIqTEVIeKC/hnYEMjyr2K8EvvpsZAfczoWLdUcSKQmb4s=
   file:
-    - /home/travis/build/ExeterBScDTS/ECM3432-2020-minsky/minsky-one/target/minskyOne-0.2.war
-    - /home/travis/install.tar.gz
+   - "/home/travis/build/ExeterBScDTS/ECM3432-2020-minsky/minsky-one/target/minskyOne-0.2.war"
+   - /home/travis/install.tar.gz
   skip_cleanup: true
   draft: false
   on:
     repo: ExeterBScDTS/ECM3432-2020-minsky
     tags: true
-  

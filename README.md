@@ -1,4 +1,7 @@
-# ECM3432-minsky
-A software engineering exercise featuring the development of an experimental robot interface
+# ECM3432-2020-minsky
+
+A software engineering exercise.
+
+<https://travis-ci.com/ExeterBScDTS/ECM3432-2020-minsky>
 
 ![robot picture](minsky.jpg "I can help")
