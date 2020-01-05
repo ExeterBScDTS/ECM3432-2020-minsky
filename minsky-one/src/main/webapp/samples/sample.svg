@@ -1,0 +1,105 @@
+<svg width="960" height="500">
+    <path class="bar" d="M41 403.93h46V470H41zM88 389.028h50V470H88zM139 10h47v460h-47zM187 338.855h50V470h-50zM238 368.91h48V470h-48zM287 375.119h49v94.88h-49zM337 383.564h50V470h-50zM388 238.758h44V470h-44zM433 338.607h50V470h-50zM484 374.87h47V470h-47zM532 368.66h50V470h-50zM583 302.84h48V470h-48zM632 379.341h49v90.66h-49zM682 379.341h49v90.66h-49zM732 377.603h48V470h-48zM781 375.119h50v94.88h-50zM832 327.927h48V470h-48zM881 305.572h49V470h-49z"/>
+    <g fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">
+        <path class="domain" stroke="#000" d="M40.5 476v-5.5h890v5.5"/>
+        <g class="tick">
+            <path stroke="#000" d="M186.5 470v6"/>
+            <text fill="#000" y="9" dy=".71em" transform="translate(186.5 470)">
+                October
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M336.5 470v6"/>
+            <text fill="#000" y="9" dy=".71em" transform="translate(336.5 470)">
+                2011
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M483.5 470v6"/>
+            <text fill="#000" y="9" dy=".71em" transform="translate(483.5 470)">
+                April
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M631.5 470v6"/>
+            <text fill="#000" y="9" dy=".71em" transform="translate(631.5 470)">
+                July
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M780.5 470v6"/>
+            <text fill="#000" y="9" dy=".71em" transform="translate(780.5 470)">
+                October
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M930.5 470v6"/>
+            <text fill="#000" y="9" dy=".71em" transform="translate(930.5 470)">
+                2012
+            </text>
+        </g>
+    </g>
+    <g fill="none" font-size="10" font-family="sans-serif" text-anchor="end">
+        <path class="domain" stroke="#000" d="M34 470.5h6.5v-460H34"/>
+        <g class="tick">
+            <path stroke="#000" d="M40 470.5h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 470.5)">
+                0
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 420.824h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 420.824)">
+                200
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 371.148h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 371.148)">
+                400
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 321.472h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 321.472)">
+                600
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 271.796h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 271.796)">
+                800
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 222.12h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 222.12)">
+                1,000
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 172.444h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 172.444)">
+                1,200
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 122.768h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 122.768)">
+                1,400
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 73.092h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 73.092)">
+                1,600
+            </text>
+        </g>
+        <g class="tick">
+            <path stroke="#000" d="M40 23.416h-6"/>
+            <text fill="#000" x="-9" dy=".32em" transform="translate(40 23.416)">
+                1,800
+            </text>
+        </g>
+    </g>
+</svg>

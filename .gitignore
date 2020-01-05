@@ -7,5 +7,21 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-# https://github.com/takari/maven-wrapper#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+
+
+# My temporary/test dir
+test/
+
+# Various VS Code stuff as found along the way
+.settings
+.classpath
+.project
+settings.json
+launch.test.json
+.vscode/launch.json
+
+npm-debug.log
+minsky-one/src/main/webapp/static/

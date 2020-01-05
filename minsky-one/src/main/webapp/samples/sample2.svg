@@ -1,0 +1,31 @@
+<svg width="960" height="500">
+<g transform="translate(40,10)">
+
+<rect class="bar" x="1" transform="translate(0,393.93088552915765)" width="49" height="66.06911447084235"></rect>
+<rect class="bar" x="1" transform="translate(50,379.0280777537797)" width="49" height="80.97192224622029"></rect>
+<rect class="bar" x="1" transform="translate(100,0)" width="49" height="460"></rect>
+<rect class="bar" x="1" transform="translate(150,328.85529157667384)" width="49" height="131.14470842332616"></rect>
+<rect class="bar" x="1" transform="translate(200,358.90928725701946)" width="49" height="101.09071274298054"></rect>
+<rect class="bar" x="1" transform="translate(250,365.11879049676025)" width="49" height="94.88120950323975"></rect>
+<rect class="bar" x="1" transform="translate(300,373.56371490280776)" width="49" height="86.43628509719224"></rect>
+<rect class="bar" x="1" transform="translate(350,228.75809935205183)" width="49" height="231.24190064794817"></rect>
+<rect class="bar" x="1" transform="translate(400,328.60691144708426)" width="49" height="131.39308855291574"></rect>
+<rect class="bar" x="1" transform="translate(450,364.8704103671706)" width="49" height="95.12958963282938"></rect>
+<rect class="bar" x="1" transform="translate(500,358.6609071274298)" width="49" height="101.33909287257018"></rect>
+<rect class="bar" x="1" transform="translate(550,292.8401727861771)" width="49" height="167.1598272138229"></rect>
+<rect class="bar" x="1" transform="translate(600,369.34125269978404)" width="49" height="90.65874730021596"></rect>
+<rect class="bar" x="1" transform="translate(650,369.34125269978404)" width="49" height="90.65874730021596"></rect>
+<rect class="bar" x="1" transform="translate(700,367.6025917926566)" width="49" height="92.3974082073434"></rect>
+<rect class="bar" x="1" transform="translate(750,365.11879049676025)" width="49" height="94.88120950323975"></rect>
+<rect class="bar" x="1" transform="translate(800,317.92656587473004)" width="49" height="142.07343412526996"></rect>
+<rect class="bar" x="1" transform="translate(850,295.5723542116631)" width="49" height="164.42764578833692"></rect>
+<rect class="bar" x="1" transform="translate(900,460)" width="-1" height="0"></rect>
+<!--
+<g transform="translate(0,460)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">
+<path class="domain" stroke="#000" d="M0.5,6V0.5H890.5V6"></path>
+<g class="tick" opacity="1" transform="translate(146.5,0)">
+<line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">October</text>
+</g>
+<g class="tick" opacity="1" transform="translate(296.5,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2011</text></g><g class="tick" opacity="1" transform="translate(443.5,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">April</text></g><g class="tick" opacity="1" transform="translate(591.5,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">July</text></g><g class="tick" opacity="1" transform="translate(740.5,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">October</text></g><g class="tick" opacity="1" transform="translate(890.5,0)"><line stroke="#000" y2="6"></line><text fill="#000" y="9" dy="0.71em">2012</text></g></g><g fill="none" font-size="10" font-family="sans-serif" text-anchor="end"><path class="domain" stroke="#000" d="M-6,460.5H0.5V0.5H-6"></path><g class="tick" opacity="1" transform="translate(0,460.5)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">0</text></g><g class="tick" opacity="1" transform="translate(0,410.82397408207345)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">200</text></g><g class="tick" opacity="1" transform="translate(0,361.1479481641469)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">400</text></g><g class="tick" opacity="1" transform="translate(0,311.4719222462203)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">600</text></g><g class="tick" opacity="1" transform="translate(0,261.79589632829374)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">800</text></g><g class="tick" opacity="1" transform="translate(0,212.11987041036718)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,000</text></g><g class="tick" opacity="1" transform="translate(0,162.44384449244058)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,200</text></g><g class="tick" opacity="1" transform="translate(0,112.76781857451402)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,400</text></g><g class="tick" opacity="1" transform="translate(0,63.09179265658747)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,600</text></g><g class="tick" opacity="1" transform="translate(0,13.41576673866092)"><line stroke="#000" x2="-6"></line><text fill="#000" x="-9" dy="0.32em">1,800</text></g></g></g>
+-->
+</svg>

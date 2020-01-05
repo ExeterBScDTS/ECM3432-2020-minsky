@@ -1,0 +1,21 @@
+language: java
+jdk:
+- openjdk11
+script:
+- cd minsky-one && mvn package; export MAVEN_RESULT=$?
+- if [ "$MAVEN_RESULT" -ne 0 ]; then exit 1; fi
+before_deploy:
+  - tar czvf /home/travis/install.tar.gz install
+deploy:
+  provider: releases
+  api_key:
+    secure: X
+  file:
+    - /home/travis/build/ExeterBScDTS/ECM3432-2020-minsky/minsky-one/target/minskyOne-0.2.war
+    - /home/travis/install.tar.gz
+  skip_cleanup: true
+  draft: false
+  on:
+    repo: ExeterBScDTS/ECM3432-2020-minsky
+    tags: true
+  

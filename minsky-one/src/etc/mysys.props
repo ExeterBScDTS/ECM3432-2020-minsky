@@ -1,0 +1,1 @@
+jetty.jaas.login.conf=etc/login.conf

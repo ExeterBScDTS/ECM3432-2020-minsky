@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure>
+    <Set name="contextPath">/</Set>
+
+    <Set name="war"><SystemProperty name="jetty.home" default="."/>/</Set>
+
+    <Get name="securityHandler">
+      <Set name="loginService">
+            <New class="org.eclipse.jetty.jaas.JAASLoginService">
+                  <Set name="Name">Test JAAS Realm</Set>
+                  <Set name="LoginModuleName">xyz</Set>
+            </New>
+      </Set>
+    </Get>
+
+</Configure>

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
+
+<!-- =============================================================== -->
+<!-- Configure the webapp                                            -->
+<!-- =============================================================== -->
+<Configure id='wac' class="org.eclipse.jetty.webapp.WebAppContext">
+
+  <Set name="contextPath">/</Set>
+
+  <Set name="war"><Property name="jetty.webapps" default="."/>/minskyOne-0.2.war</Set>
+  <Set name="extractWAR">true</Set>
+
+  <!--
+   <Get name="securityHandler">
+    <Set name="realmName">Test Realm</Set>
+    <Set name="authMethod">BASIC</Set>
+    <Call name="addConstraintMapping">
+      <Arg>
+         <New class="org.eclipse.jetty.security.ConstraintMapping">
+            <Set name="pathSpec">/foo/*</Set>
+            <Set name="constraint">
+              <New class="org.eclipse.jetty.util.security.Constraint">
+                  <Set name="name">Foo Auth</Set>
+                  <Set name="authenticate">true</Set>
+                  <Set name="roles">
+                    <Array type="java.lang.String">
+                      <Item>admin</Item>
+                      <Item>manager</Item>
+                    </Array>
+                  </Set>
+              </New>
+            </Set>
+         </New>
+      </Arg>
+    </Call>
+    <Set name="loginService">
+      <New class="org.eclipse.jetty.security.HashLoginService">
+        <Set name="name">Test Realm</Set>
+        <Set name="config">/src/tmp/small-security-test/realm.properties</Set>
+      </New>
+    </Set>
+  </Get>
+
+  -->
+
+
+  <!--
+    The following <Call>...</Call> is equivalent to this in web.xml  
+    <context-param>
+      <param-name>minsky.dir</param-name>
+      <param-value>some-dir</param-value>
+    </context-param>
+ -->
+
+  <!--
+   <Call name="setInitParameter">
+    <Arg>minsky.camera.tir.rgbpath</Arg>
+    <Arg>/run/mlx90640-0.rgb</Arg>
+  </Call>
+
+  <Call name="setInitParameter">
+   <Arg>minsky.camera.tir.fltpath</Arg>
+   <Arg>/run/mlx90640-0.flt</Arg>
+  </Call>
+
+  <Call name="setInitParameter">
+    <Arg>minsky.process.camera.tir</Arg>
+    <Arg>sudo /home/pi/github/mlx90640-library/mmap</Arg>
+  </Call>
+
+  <Call name="setInitParameter">
+    <Arg>minsky.camera.colour.jpgpath</Arg>
+    <Arg>/run/camera.jpg</Arg>
+  </Call>
+
+  <Call name="setInitParameter">
+    <Arg>minsky.process.camera.colour</Arg>
+    <Arg>sudo mjpg_streamer -i "input_raspicam.so" -o "output_file.so -f /run -s 2 -l camera.jpg"</Arg>
+   </Call>
+
+-->
+
+</Configure>
+

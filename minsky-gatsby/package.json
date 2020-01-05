@@ -1,0 +1,57 @@
+{
+  "name": "minksky-gatsby",
+  "private": true,
+  "description": "Gatsby front-end for Minsky",
+  "version": "0.1.0",
+  "author": "Michael Saunby <mike@saunby.net>",
+  "dependencies": {
+    "@types/node": "^13.1.0",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "gatsby": "^2.18.12",
+    "gatsby-image": "^2.2.34",
+    "gatsby-plugin-manifest": "^2.2.31",
+    "gatsby-plugin-offline": "^3.0.27",
+    "gatsby-plugin-react-helmet": "^3.1.16",
+    "gatsby-plugin-sharp": "^2.3.5",
+    "gatsby-plugin-typescript": "^2.1.23",
+    "gatsby-source-filesystem": "^2.1.40",
+    "gatsby-transformer-sharp": "^2.3.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-input-slider": "^5.1.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build --prefix-paths",
+    "postbuild": "rm -rf ../minsky-one/src/main/webapp/static;cp -r public/ ../minsky-one/src/main/webapp/static",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "zztest": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "test": "mocha -r ts-node/register src/components/*.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ExeterBScDTS/ECM3432-minsky"
+  },
+  "bugs": {
+    "url": "https://github.com/ExeterBScDTS/ECM3432-minsky/issues"
+  }
+}
