@@ -2,6 +2,8 @@ language: java
 jdk:
 - openjdk11
 script:
+- cd minsky-gatsby && yarn install && yarn build 
+- cd ..
 - cd minsky-one && mvn package; export MAVEN_RESULT=$?
 - if [ "$MAVEN_RESULT" -ne 0 ]; then exit 1; fi
 before_deploy:
