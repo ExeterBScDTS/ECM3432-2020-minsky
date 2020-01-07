@@ -5,15 +5,15 @@ import TirCanv from "../components/tircanv"
 import RgbCanv from "../components/rgbcanv"
 import Composite from "../components/composite"
 
-const CamerasPage = () => ( 
+const CamerasPage = () => (
   <Layout>
-            <div className="row">
-              <RgbCanv id="rgb" />
-              <TirCanv id="tir" />
-            </div>
-              <div>
-                <Composite tir="tir" rgb="rgb" />
-              </div>
+    <div className="row">
+      <RgbCanv id="rgb" />
+      <TirCanv id="tir" />
+    </div>
+    <div>
+      <Composite tir="tir" rgb="rgb" />
+    </div>
   </Layout>
 )
 
