@@ -2,6 +2,9 @@ import * as React from "react"
 // https://www.npmjs.com/package/react-input-slider
 import Slider from 'react-input-slider';
 
+window.mint = 0;
+window.maxt = 0;
+
 async function sleep(ms:number):Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -89,14 +92,14 @@ class Composite extends React.Component<MyProps>{
 
         <div style={{marginTop: '50px'}}>
         <p>Minimum Temperature</p>
-        <Slider axis="x" x={this.state.mint} onChange={
-            ({x,y})=>{this.setState({mint:x})}
+        <Slider axis="x" x={window.mint} min={0} max={100} onChange={
+                ({x,y})=>{window.mint = x}
             } style={{width:160,visibility:this.state.vis}} />
         </div>
         <div>
         <p>Maximum Temperature</p>
-        <Slider axis="x" x={this.state.maxt} onChange={
-            ({x,y})=>{this.setState({maxt:x})}
+        <Slider axis="x" x={window.maxt} min={0} max={100} onChange={
+                ({x,y})=>{window.maxt = x}
             } style={{width:160,visibility:this.state.vis}} />
         </div>
         </>

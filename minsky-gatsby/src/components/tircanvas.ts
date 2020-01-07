@@ -34,9 +34,9 @@ class TIRCanvas {
   }
 
   palIdx(v:number):number{
-    if (v < this.mint) v=this.mint;
-    if (v > this.maxt) v=this.maxt;
-    let p = (v-this.mint) * (this.pal.getLength()/(this.maxt-this.mint));
+    if (v < window.mint) v=window.mint;
+    if (v > window.maxt) v=window.maxt;
+    let p = (v-window.mint) * (this.pal.getLength()/(window.maxt-window.mint));
     return ~~p;
   }
 
