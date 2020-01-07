@@ -9,12 +9,28 @@ class TIRCanvas {
   private readonly pal: Palette;
   private readonly uri: string;
   private mint = 0.0;
-  private maxt = 50.0;
+  private maxt = 100.0;
 
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string) {
     this.ctx = canvas.getContext('2d');
     this.pal = palette;
     this.uri = uri;
+  }
+
+  getMinTemp():number {
+      return this.mint;
+  }
+
+  getMaxTemp():number {
+      return this.maxt;
+  }
+
+  setMinTemp(n:number) {
+      this.mint=n;
+  }
+
+  setMaxTemp(n:number) {
+      this.maxt=n;
   }
 
   palIdx(v:number):number{
