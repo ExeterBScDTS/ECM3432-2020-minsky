@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "main": "cd ./minsky-one && mvn package && mvn jetty:run",
-    "frontend": "cd ./minsky-gatsby && yarn && yarn develop"
+    "frontend": "cd ./minsky-gatsby && yarn && yarn build && yarn develop",
+    "all": "cd ./minsky-gatsby && yarn && yarn build && cd ../minsky-one && mvn package && mvn jetty:run"
   },
   "license": "MIT"
 }

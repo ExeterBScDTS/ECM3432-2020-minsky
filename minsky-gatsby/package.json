@@ -38,7 +38,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build --prefix-paths",
-    "postbuild": "mv ./public/ ../minsky-one/src/main/webapp/static",
+    "postbuild": "(robocopy ./public/ ../minsky-one/src/main/webapp/static /copyall /e) ^& IF %ERRORLEVEL% LEQ 7 exit 0",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
