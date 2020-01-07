@@ -2,6 +2,9 @@ import * as React from "react"
 // https://www.npmjs.com/package/react-input-slider
 import Slider from 'react-input-slider';
 
+window.mint = 0;
+window.maxt = 0;
+
 async function sleep(ms:number):Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -35,7 +38,7 @@ class Composite extends React.Component<MyProps>{
 
         let mov_x = this.state.x * this.width / 100;
         let mov_y = this.state.y * this.height / 100;
-       
+
         let tir_w = 320 * (285 + this.state.scale) / 200;
         let tir_h = 240 * (285 + this.state.scale) / 200;
         mov_x -= tir_w / 2;
@@ -55,7 +58,7 @@ class Composite extends React.Component<MyProps>{
         this.draw();
         window.requestAnimationFrame(() => this.autoRefresh());
       }
-    
+
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
@@ -69,7 +72,7 @@ class Composite extends React.Component<MyProps>{
 
     render() {
         return(
-        <>         
+        <>
         <div>
         <Slider axis="y" y={this.state.y} onChange={
             ({x,y})=>{this.setState({y:y})}
@@ -79,15 +82,33 @@ class Composite extends React.Component<MyProps>{
         <div>
         <Slider axis="x" x={this.state.x} onChange={
             ({x,y})=>{this.setState({x:x})}
-            } style={{width:640,visibility:this.state.vis}} /> 
+            } style={{width:640,visibility:this.state.vis}} />
         </div>
         <div>
         <Slider axis="x" x={this.state.scale} onChange={
             ({x,y})=>{this.setState({scale:x})}
-            } style={{width:160,visibility:this.state.vis}} /> 
+            } style={{width:160,visibility:this.state.vis}} />
+        </div>
+
+        <div style={{marginTop: '50px'}}>
+        <p>Minimum Temperature</p>
+        <Slider axis="x" x={window.mint} min={0} max={100} onChange={
+                ({x,y})=>{window.mint = x;this.setState({});}
+
+
+            } style={{width:160,visibility:this.state.vis}} />
+        </div>
+        <div>
+        <p>Maximum Temperature</p>
+        <Slider axis="x" x={window.maxt} min={0} max={100} onChange={
+                ({x,y})=>{window.maxt = x;this.setState({})}
+
+
+            } style={{width:160,visibility:this.state.vis}} />
         </div>
         </>
         )
+
     }
 }
 
