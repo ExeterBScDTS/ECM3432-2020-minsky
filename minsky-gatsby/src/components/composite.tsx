@@ -93,17 +93,22 @@ class Composite extends React.Component<MyProps>{
         <div style={{marginTop: '50px'}}>
         <p>Minimum Temperature</p>
         <Slider axis="x" x={window.mint} min={0} max={100} onChange={
-                ({x,y})=>{window.mint = x}
+                ({x,y})=>{window.mint = x;this.setState({});}
+
+
             } style={{width:160,visibility:this.state.vis}} />
         </div>
         <div>
         <p>Maximum Temperature</p>
         <Slider axis="x" x={window.maxt} min={0} max={100} onChange={
-                ({x,y})=>{window.maxt = x}
+                ({x,y})=>{window.maxt = x;this.setState({})}
+
+
             } style={{width:160,visibility:this.state.vis}} />
         </div>
         </>
         )
+
     }
 }
 
