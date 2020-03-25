@@ -27,9 +27,9 @@ const Layout = ({ children }:{children:any}) => {
     <>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
           <Link className="navbar-brand" to="/">Minsky One</Link>
-          <Link className="navbar-brand" to="/histogram">histogram</Link>
           <div className="collapse navbar-collapse justify-content-end">
-          <Link className="btn btn-outline-secondary" to="/cameras">settings</Link>
+          <Link className="btn btn-outline-secondary" to="/histogram">Histogram</Link>
+          <Link className="btn btn-outline-secondary" to="/cameras">Settings</Link>
           </div>
         </nav>
 
