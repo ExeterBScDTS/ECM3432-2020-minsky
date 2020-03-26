@@ -7,6 +7,7 @@ import Composite from "../components/composite"
 const IndexPage = () => (
 
 <Layout>
+  
             <div className="row" style={{visibility:"hidden",height:"0px"}} >
               <RgbCanv id="rgb" />
               <TirCanv id="tir" />
@@ -14,7 +15,7 @@ const IndexPage = () => (
               <div>
                 <Composite tir="tir" rgb="rgb" controls="off"/>
               </div>
-  </Layout>
+</Layout>
 )
 
 export default IndexPage

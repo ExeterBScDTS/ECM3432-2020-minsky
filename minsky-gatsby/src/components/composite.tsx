@@ -33,8 +33,8 @@ class Composite extends React.Component<MyProps>{
 
     private draw() {
 
-        let mov_x = this.state.x * this.width / 100;
-        let mov_y = this.state.y * this.height / 100;
+        let mov_x = (100 - this.state.y) * this.width / 100;
+        let mov_y = this.state.x * this.height / 100;
        
         let tir_w = 320 * (285 + this.state.scale) / 200;
         let tir_h = 240 * (285 + this.state.scale) / 200;
@@ -73,18 +73,18 @@ class Composite extends React.Component<MyProps>{
         <div>
         <Slider axis="y" y={this.state.y} onChange={
             ({x,y})=>{this.setState({y:y})}
-            } style={{height:480,visibility:this.state.vis}} />
-        <canvas ref="canvas" width={640} height={480}/>
+            } style={{height:640,visibility:this.state.vis}} />
+        <canvas class="image_ccw" ref="canvas" width={640} height={480}/>
         </div>
         <div>
         <Slider axis="x" x={this.state.x} onChange={
             ({x,y})=>{this.setState({x:x})}
-            } style={{width:640,visibility:this.state.vis}} /> 
+            } style={{left:30,width:480,visibility:this.state.vis}} /> 
         </div>
         <div>
         <Slider axis="x" x={this.state.scale} onChange={
             ({x,y})=>{this.setState({scale:x})}
-            } style={{width:160,visibility:this.state.vis}} /> 
+            } style={{left:30,width:160,visibility:this.state.vis}} /> 
         </div>
         </>
         )

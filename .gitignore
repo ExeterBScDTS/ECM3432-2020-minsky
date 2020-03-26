@@ -25,3 +25,4 @@ launch.test.json
 
 npm-debug.log
 minsky-one/src/main/webapp/static/
+node_modules
