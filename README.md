@@ -24,4 +24,4 @@ gatsby build
 
 <https://travis-ci.com/ECM3432-O/ECM3432-2020-minsky>
 
-![robot picture](minsky.jpg "I can help")
+![robot picture](minsky.jpg "I can help"]
