@@ -6,6 +6,9 @@
 }
 .image_cw {
     transform: rotate(90deg);
+    position: relative;
+    left: -60px;
+    top: -80px;
 }
 
 @import '../dist/vendor/bootstrap/css/bootstrap.min.css'
