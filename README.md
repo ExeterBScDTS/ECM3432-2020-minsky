@@ -17,7 +17,20 @@ then main.
 
 ```sh
 cd minsky-gatsby
-gatsby build
+yarn build
+```
+
+## Check builds
+
+<https://travis-ci.com/github/ExeterBScDTS/ECM3432-2020-minsky>
+
+## To create a release
+
+To generate a new release via Travis CI create a tag
+
+```sh
+git tag -a v0.1.x -m "v0.1.x"
+git push origin v0.1.x
 ```
 
 ## A software engineering exercise.

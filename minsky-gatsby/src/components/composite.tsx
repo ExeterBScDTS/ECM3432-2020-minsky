@@ -74,7 +74,7 @@ class Composite extends React.Component<MyProps>{
         <Slider axis="y" y={this.state.y} onChange={
             ({x,y})=>{this.setState({y:y})}
             } style={{height:640,visibility:this.state.vis}} />
-        <canvas class="image_ccw" ref="canvas" width={640} height={480}/>
+        <canvas class="image_cw" ref="canvas" width={640} height={480}/>
         </div>
         <div>
         <Slider axis="x" x={this.state.x} onChange={
