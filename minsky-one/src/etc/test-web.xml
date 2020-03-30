@@ -93,6 +93,16 @@
      <url-pattern>/histogram/*</url-pattern>
   </servlet-mapping>  
 
+   <servlet>
+     <servlet-name>update</servlet-name>
+     <servlet-class>minskyone.servlet.Update</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>update</servlet-name>
+     <url-pattern>/update/*</url-pattern>
+  </servlet-mapping>  
+
+
  <login-config>
     <auth-method>FORM</auth-method>
     <realm-name>Test JAAS Realm</realm-name>
