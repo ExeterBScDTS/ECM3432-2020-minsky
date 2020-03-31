@@ -37,14 +37,16 @@ public class Update extends HttpServlet {
         PrintWriter out = resp.getWriter();
         
         try{
-        URI location = this.get("https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/latest/");
-        //String url = location.toASCIIString();
-        String[] url = location.getPath().split("/");
-        out.println(url[url.length-1]);
+            URI location = this.getRedirect("https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/latest/");
+            String[] url = location.getPath().split("/");
+            String versionID = url[url.length-1];
+            out.println("Latest version is " + versionID);
+            String warURL = "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" +
+                versionID + "/minskyOne-0.2.war";
+            out.println(warURL);
         }catch(Exception e){
             out.println(e);
         }
-        out.print("Update available"); 
         out.println();
     }
 
@@ -76,7 +78,7 @@ https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/min
 
 */
 
-    public URI get(String uri) throws Exception {
+    public URI getRedirect(String uri) throws Exception {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpClientContext context = HttpClientContext.create();
         HttpGet httpget = new HttpGet(uri);
@@ -85,7 +87,6 @@ https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/min
         List<URI> redirectLocations = context.getRedirectLocations();
         URI location = URIUtils.resolve(httpget.getURI(), target, redirectLocations);
         return location;
-        //return location.toASCIIString();
     }   
 
 }
