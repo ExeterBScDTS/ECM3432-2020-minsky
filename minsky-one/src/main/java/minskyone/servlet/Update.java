@@ -2,6 +2,7 @@ package minskyone.servlet;
 
 import static org.mockito.Mockito.doReturn;
 
+import java.io.FileOutputStream;
 /*
  Resources 
  For Java 11
@@ -10,6 +11,7 @@ import static org.mockito.Mockito.doReturn;
  For Java 8
 */
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.util.List;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -87,6 +90,25 @@ https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/min
         List<URI> redirectLocations = context.getRedirectLocations();
         URI location = URIUtils.resolve(httpget.getURI(), target, redirectLocations);
         return location;
-    }   
+    }  
+    
+    // See http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
+    public void downloadWAR(String uri, String filename) throws Exception {
+        FileOutputStream out = new FileOutputStream(filename);
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpget = new HttpGet(uri);
+        CloseableHttpResponse response = httpclient.execute(httpget);
+        try {
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                InputStream instream = entity.getContent();
+                int byteOne = instream.read();
+                int byteTwo = instream.read();
+                // Do not need the rest
+            }
+        } finally {
+            response.close();
+        }
+    }
 
 }
