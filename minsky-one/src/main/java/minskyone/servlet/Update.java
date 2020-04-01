@@ -2,6 +2,7 @@ package minskyone.servlet;
 
 import static org.mockito.Mockito.doReturn;
 
+import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 /*
  Resources 
@@ -47,6 +48,7 @@ public class Update extends HttpServlet {
             String warURL = "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" +
                 versionID + "/minskyOne-0.2.war";
             out.println(warURL);
+            this.downloadWAR(warURL, "minskyOne-0.2.war");
         }catch(Exception e){
             out.println(e);
         }
@@ -100,11 +102,23 @@ https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/min
         CloseableHttpResponse response = httpclient.execute(httpget);
         try {
             HttpEntity entity = response.getEntity();
+            long contentLength = entity.getContentLength();
             if (entity != null) {
-                InputStream instream = entity.getContent();
-                int byteOne = instream.read();
-                int byteTwo = instream.read();
-                // Do not need the rest
+                InputStream in = new BufferedInputStream(entity.getContent());
+                
+                byte[] data = new byte[(int)contentLength];
+                int bytesRead = 0;
+                int offset = 0;
+                while (offset < contentLength) {
+                    bytesRead = in.read(data, offset, data.length - offset);
+                    if (bytesRead == -1)
+                        break;
+                    offset += bytesRead;
+                }
+                in.close();
+                out.write(data);
+                out.flush();
+                out.close();
             }
         } finally {
             response.close();
