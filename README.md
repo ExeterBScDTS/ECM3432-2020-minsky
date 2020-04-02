@@ -39,6 +39,22 @@ git tag -a v0.1.x -m "v0.1.x"
 git push origin v0.1.x
 ```
 
+## Deployment
+
+Adding the update feature created some issues.
+
+```text
+HTTP ERROR 500 java.lang.NoClassDefFoundError: org/apache/http/protocol/HttpContext
+URI:	/update
+STATUS:	500
+MESSAGE:	java.lang.NoClassDefFoundError: org/apache/http/protocol/HttpContext
+SERVLET:	update
+CAUSED BY:	java.lang.NoClassDefFoundError: org/apache/http/protocol/HttpContext
+CAUSED BY:	java.lang.ClassNotFoundException: org.apache.http.protocol.HttpContext
+```
+
+Need to add library to ```$JETTY_HOME/lib/ext``` or perhaps ```minsky-base/lib/ext```
+
 ## A software engineering exercise.
 
 <https://travis-ci.com/ECM3432-O/ECM3432-2020-minsky>
