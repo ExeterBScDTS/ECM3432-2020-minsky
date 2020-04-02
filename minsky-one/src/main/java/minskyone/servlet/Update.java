@@ -54,23 +54,23 @@ public class Update extends HttpServlet {
         }
         out.println();
     }
-
-
-/*
-public String get(String uri) throws Exception {
+   
+    /*
+    This method is not used here, but is included to show that to resolve
+    redirects and fetch the resulting page is pretty simple and doesn't
+    require the contortions used in the other methods here.
+    */
+    public String getPage(String uri) throws Exception {
   
-    
-    CloseableHttpClient httpclient = HttpClients.createDefault();
-    HttpGet httpGet = new HttpGet(uri);
-    CloseableHttpResponse response1 = httpclient.execute(httpGet);
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet(uri);
+        CloseableHttpResponse response1 = httpclient.execute(httpGet);
 
-    return response1.toString();
-}
-*/
-
-// See https://hc.apache.org/httpcomponents-client-4.5.x/tutorial/html/fundamentals.html#d5e334
+        return response1.toString();
+    }
 
 /*
+
 
 Step 1. Go here
 https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/latest/
@@ -80,6 +80,10 @@ https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/tag/v0.1.1
 
 Step 2. Create new URL. Like this
 https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/minskyOne-0.2.war
+
+See https://hc.apache.org/httpcomponents-client-4.5.x/tutorial/html/fundamentals.html#d5e334
+
+and http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
 
 */
 
@@ -94,7 +98,7 @@ https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/min
         return location;
     }  
     
-    // See http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
+
     public void downloadWAR(String uri, String filename) throws Exception {
         FileOutputStream out = new FileOutputStream(filename);
         CloseableHttpClient httpclient = HttpClients.createDefault();

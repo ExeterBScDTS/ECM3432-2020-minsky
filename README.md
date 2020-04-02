@@ -20,6 +20,12 @@ cd minsky-gatsby
 yarn build
 ```
 
+```sh
+cd minsky-one
+mvn compile
+mvn package
+```
+
 ## Check builds
 
 <https://travis-ci.com/github/ExeterBScDTS/ECM3432-2020-minsky>
