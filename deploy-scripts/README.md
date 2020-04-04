@@ -10,4 +10,5 @@ Although the above technique allows the application to download the latest relea
 
 ```sh
 TAGNAME=`git describe --tags --abbrev=0`
+(cd minsky-one; tar czvf /home/travis/install-${TAGNAME}.tar.gz install)
 ```
