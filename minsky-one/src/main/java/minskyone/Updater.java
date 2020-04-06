@@ -24,7 +24,7 @@ import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class UpdateData {
+public class Updater {
 
     /*
 
@@ -41,7 +41,7 @@ public class UpdateData {
             String warURL = "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" +
                 versionID + "/minskyOne-0.2.war";
             out.println(warURL);
-            this.downloadWAR(warURL, "minskyOne-0.2.war");
+            this.downloadBinary(warURL, "minskyOne-0.2.war");
         }catch(Exception e){
             out.println(e);
         }
@@ -94,7 +94,7 @@ and http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
     }  
     
 
-    public void downloadWAR(String uri, String filename) throws Exception {
+    public static void downloadBinary(String uri, String filename) throws Exception {
         FileOutputStream out = new FileOutputStream(filename);
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(uri);

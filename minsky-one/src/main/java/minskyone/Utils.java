@@ -2,6 +2,7 @@ package minskyone;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.json.*;
 
 public class Utils {
 
@@ -40,5 +41,9 @@ public class Utils {
             }
         }
         return p;
-    }  
+    }
+    
+    public static String jsonNameValue( String[] names, String[] values){
+        return("{\"hello\":\"world\"}");
+    }
 }
