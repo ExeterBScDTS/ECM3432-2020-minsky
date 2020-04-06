@@ -43,7 +43,17 @@ public class Utils {
         return p;
     }
     
+    // See https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
     public static String jsonNameValue( String[] names, String[] values){
-        return("{\"hello\":\"world\"}");
+
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+
+        for(int i=0; i<names.length; i++){
+            builder.add(names[i], values[i]);
+        }
+        
+        JsonObject value = builder.build();
+
+        return(value.toString());
     }
 }
