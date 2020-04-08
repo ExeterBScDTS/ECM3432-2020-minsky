@@ -15,6 +15,7 @@ deploy:
   file:
    - "/home/travis/build/ExeterBScDTS/ECM3432-2020-minsky/minsky-one/target/minskyOne-0.2.war"
    - /home/travis/install-${TAGNAME}.tar.gz
+   - /home/travis/minskyOne-${TAGNAME}.zip
   skip_cleanup: true
   draft: false
   on:
