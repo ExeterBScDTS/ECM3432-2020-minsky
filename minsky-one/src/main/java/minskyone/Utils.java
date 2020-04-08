@@ -2,6 +2,11 @@ package minskyone;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Map;
+
 import javax.json.*;
 
 public class Utils {
@@ -44,13 +49,14 @@ public class Utils {
     }
     
     // See https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
-    public static String jsonNameValue( String[] names, String[] values){
+    // and https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
+
+    public static String jsonNameValue(Map<String,String> dict){
 
         JsonObjectBuilder builder = Json.createObjectBuilder();
-
-        for(int i=0; i<names.length; i++){
-            builder.add(names[i], values[i]);
-        }
+        
+        // use lambda function
+        dict.forEach((k,v) -> builder.add(k, v)); 
         
         JsonObject value = builder.build();
 
