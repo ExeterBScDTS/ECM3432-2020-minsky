@@ -12,3 +12,12 @@ Although the above technique allows the application to download the latest relea
 TAGNAME=`git describe --tags --abbrev=0`
 (cd minsky-one; tar czvf /home/travis/install-${TAGNAME}.tar.gz install)
 ```
+
+## Deploy war and zip
+
+```sh
+file:
+   - "/home/travis/build/ExeterBScDTS/ECM3432-2020-minsky/minsky-one/target/minskyOne-0.2.war"
+   - /home/travis/install-${TAGNAME}.tar.gz
+   - /home/travis/minskyOne-${TAGNAME}.zip
+```
