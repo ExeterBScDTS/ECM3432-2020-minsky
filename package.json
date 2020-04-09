@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "scripts": {
-    "main": "cd ./minsky-one && mvn package && mvn jetty:run",
+    "main": "(cd ./minsky-gatsby && yarn && yarn build) && (cd ./minsky-one && mvn package && mvn jetty:run)",
     "build": "cd ./minsky-gatsby && yarn && yarn build",
     "frontend": "cd ./minsky-gatsby && yarn && yarn develop"
   },

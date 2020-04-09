@@ -71,10 +71,12 @@ Step 1. Go here
 https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/latest/
 
 Get a URL like this as the redirect endpoint. Like this
-https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/tag/v0.1.1
+https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/tag/v0.1.8
 
 Step 2. Create new URL. Like this
-https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.1/minskyOne-0.2.war
+https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.8/minskyOne-v0.1.8.zip
+or to download war
+https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/v0.1.8/minskyOne-0.2.war
 
 See https://hc.apache.org/httpcomponents-client-4.5.x/tutorial/html/fundamentals.html#d5e334
 

@@ -34,7 +34,16 @@ return (
                 <p>Latest version is {latestVer}</p>
             </div>
             <div>
-                <Link className="btn btn-outline-secondary" to="/update">Download latest</Link>
+                <Link className="btn btn-outline-secondary" to={"/update?download="+latestVer}>Download latest</Link>
+  <form
+    onSubmit={event => {
+      event.preventDefault()
+      fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+    }}
+  >
+    {/* (skip form inputs for brevity) */}
+    <input type="submit" value="Submit" />
+  </form>
             </div>
             <div>
                 <p></p>

@@ -108,7 +108,7 @@
   </servlet>
   <servlet-mapping>
      <servlet-name>update</servlet-name>
-     <url-pattern>/update/*</url-pattern>
+     <url-pattern>/update</url-pattern>
   </servlet-mapping>  
 
 
