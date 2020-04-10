@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 
+import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import minskyone.Updater;
+
+// For tips on Async IO see https://webtide.com/servlet-3-1-async-io-and-jetty/
 
 public class Update extends HttpServlet {
 
@@ -19,6 +22,8 @@ public class Update extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/plain");
         PrintWriter out = resp.getWriter();
+
+        AsyncContext async = req.startAsync();
         
         try{
             String requestedVersionID = req.getParameter("download");

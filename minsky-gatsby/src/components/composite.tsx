@@ -54,7 +54,7 @@ class Composite extends React.Component<MyProps>{
         await sleep(200).then(()=>{});
         this.draw();
         window.requestAnimationFrame(() => this.autoRefresh());
-      }
+    }
     
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;

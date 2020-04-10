@@ -111,6 +111,14 @@
      <url-pattern>/update</url-pattern>
   </servlet-mapping>  
 
+  <servlet>
+     <servlet-name>event</servlet-name>
+     <servlet-class>minskyone.servlet.EventSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>event</servlet-name>
+     <url-pattern>/event</url-pattern>
+  </servlet-mapping>  
 
  <login-config>
     <auth-method>FORM</auth-method>

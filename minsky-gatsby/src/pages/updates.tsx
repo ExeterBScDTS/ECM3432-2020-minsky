@@ -26,32 +26,28 @@ useEffect(() => {
 
 return (
 <Layout>
-  
-            <div>
+    <div>
                 <p>Installed version is {installedVer}</p>
-            </div>
-            <div>
+    </div>
+    <div>
                 <p>Latest version is {latestVer}</p>
-            </div>
-            <div>
+    </div>
+    <div>
                 <Link className="btn btn-outline-secondary" to={"/update?download="+latestVer}>Download latest</Link>
-  <form
-    onSubmit={event => {
-      event.preventDefault()
-      fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
-    }}
-  >
-    {/* (skip form inputs for brevity) */}
-    <input type="submit" value="Submit" />
-  </form>
-            </div>
-            <div>
+    <form
+      onSubmit={event => {
+        event.preventDefault()
+        fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+      }}>
+      <input type="submit" value="Submit" />
+    </form>
+    </div>
+    <div>
                 <p></p>
-            </div>
-            <div>
+    </div>
+    <div>
                 <Link className="btn btn-outline-secondary" to="/updates">Update</Link>
-            </div>
-            
+    </div>
 </Layout>
 )
 }
