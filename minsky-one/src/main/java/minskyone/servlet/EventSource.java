@@ -28,7 +28,8 @@ public class EventSource extends HttpServlet {
 
         for (int i = 0; i < 10; i++) {
 
-            writer.write("data: " + System.currentTimeMillis() + "\n\n");
+            writer.write("data: " + i + "_" + System.currentTimeMillis() + "\n\n");
+            writer.flush();
 
             try {
                 Thread.sleep(1000);
@@ -36,6 +37,8 @@ public class EventSource extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        writer.write("data: " + "DONE" + "\n\n");
+        writer.flush();
         writer.close();
     }
 
