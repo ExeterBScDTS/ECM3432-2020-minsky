@@ -20,7 +20,6 @@ public class EventSource extends HttpServlet {
 
         // content type must be set to text/event-stream
         response.setContentType("text/event-stream");
-
         // encoding must be set to UTF-8
         response.setCharacterEncoding("UTF-8");
 

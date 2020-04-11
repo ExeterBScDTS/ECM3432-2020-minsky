@@ -24,6 +24,9 @@ import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+import minskyone.DownloadCallback;
+
+
 public class Updater {
 
     /*
@@ -96,7 +99,7 @@ and http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
     }  
     
 
-    public static void downloadBinary(String uri, String filename) throws Exception {
+    public static void downloadBinary(String uri, String filename, DownloadCallback cb) throws Exception {
         FileOutputStream out = new FileOutputStream(filename);
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(uri);
@@ -111,6 +114,7 @@ and http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
                 int bytesRead = 0;
                 int offset = 0;
                 while (offset < contentLength) {
+                    cb.progress(offset);
                     bytesRead = in.read(data, offset, data.length - offset);
                     if (bytesRead == -1)
                         break;
