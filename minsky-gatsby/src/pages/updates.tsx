@@ -34,7 +34,7 @@ return (
     </div>
     <div>
                 <Link className="btn btn-outline-secondary" to={"/update?download="+latestVer}>Download latest</Link>
-    <form
+                <form
       onSubmit={event => {
         event.preventDefault()
         fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
