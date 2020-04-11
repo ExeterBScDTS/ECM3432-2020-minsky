@@ -26,13 +26,13 @@ public class EventSource extends HttpServlet {
 
         PrintWriter writer = response.getWriter();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
 
-            writer.write("data: " + i + "_" + System.currentTimeMillis() + "\n\n");
+            writer.write("data: " + i + "\n\n");
             writer.flush();
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

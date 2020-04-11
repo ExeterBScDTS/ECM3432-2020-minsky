@@ -8,7 +8,7 @@ const EventsPage = () => {
 
   const [msg, setMsg] = useState("dummy")
   const [active, setActive] = useState(true);
-  const [progress, setProgress] = useState(0.5);
+  const [progress, setProgress] = useState(0.0);
   
   return (
     <Layout>
@@ -30,6 +30,9 @@ const EventsPage = () => {
                   evtSource.close()
                   setActive(true)
                   alert("It's done")
+                }
+                else{
+                  setProgress(e.data / 100)
                 }
                 console.log(msg)
               }
