@@ -8,6 +8,7 @@ const EventsPage = () => {
 
   const [msg, setMsg] = useState("dummy")
   const [active, setActive] = useState(true);
+  const [progress, setProgress] = useState(0.5);
   
   return (
     <Layout>
@@ -36,6 +37,7 @@ const EventsPage = () => {
           }}>
           <input type="submit" value="Submit" disabled={!active} />
         </form>
+        <progress id="progress1" value={progress}></progress>
       </div>
     </Layout>
   )
