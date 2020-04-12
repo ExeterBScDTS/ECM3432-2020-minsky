@@ -9,13 +9,12 @@ import { useState, useEffect } from "react"
 
 */
 
-
-
 const UpdatesPage = () => {
-const installedVer = "unknown";
-const [latestVer, setLatestVer] = useState(0);
+  const installedVer = "unknown";
+  const [latestVer, setLatestVer] = useState(0);
+  const [msg, setMsg] = useState("dummy")
 
-useEffect(() => {
+  useEffect(() => {
     // get data
     fetch(`/version.json`)
       .then(response => response.json())
@@ -24,32 +23,38 @@ useEffect(() => {
       })
   }, [])
 
-return (
-<Layout>
-    <div>
-                <p>Installed version is {installedVer}</p>
-    </div>
-    <div>
-                <p>Latest version is {latestVer}</p>
-    </div>
-    <div>
-                <Link className="btn btn-outline-secondary" to={"/update?download="+latestVer}>Download latest</Link>
-                <form
-      onSubmit={event => {
-        event.preventDefault()
-        fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
-      }}>
-      <input type="submit" value="Submit" />
-    </form>
-    </div>
-    <div>
-                <p></p>
-    </div>
-    <div>
-                <Link className="btn btn-outline-secondary" to="/updates">Update</Link>
-    </div>
-</Layout>
-)
+  return (
+    <Layout>
+      <div>
+        <p>{msg}</p>
+      </div>
+      <div>
+        <p>Installed version is {installedVer}</p>
+      </div>
+      <div>
+        <p>Latest version is {latestVer}</p>
+      </div>
+      <div>
+        <form
+          onSubmit={event => {
+            event.preventDefault()
+            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+            var evtSource = new EventSource("/update?download=" + latestVer)
+            evtSource.onmessage = function (e) {
+              setMsg(e.data)
+            }
+          }}>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <div>
+        <p></p>
+      </div>
+      <div>
+        <Link className="btn btn-outline-secondary" to="/updates">Update</Link>
+      </div>
+    </Layout>
+  )
 }
 
 export default UpdatesPage

@@ -114,12 +114,13 @@ and http://www.java2s.com/Tutorial/Java/0320__Network/SavebinaryfilefromURL.htm
                 int bytesRead = 0;
                 int offset = 0;
                 while (offset < contentLength) {
-                    cb.progress(offset);
+                    cb.progress((int)(100 * offset/contentLength));
                     bytesRead = in.read(data, offset, data.length - offset);
                     if (bytesRead == -1)
                         break;
                     offset += bytesRead;
                 }
+                cb.progress(100);
                 in.close();
                 out.write(data);
                 out.flush();

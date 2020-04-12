@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 
-import javax.servlet.AsyncContext;
+// import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class Update extends HttpServlet implements DownloadCallback{
 
         this.out = resp.getWriter();
 
-        AsyncContext async = req.startAsync();
+        // AsyncContext async = req.startAsync();
         
         try{
             String requestedVersionID = req.getParameter("download");
