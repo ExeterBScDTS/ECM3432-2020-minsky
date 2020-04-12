@@ -63,7 +63,26 @@ const UpdatesPage = () => {
         <p></p>
       </div>
       <div>
-        <Link className="btn btn-outline-secondary" to="/updates">Update</Link>
+      <form
+          onSubmit={event => {
+            event.preventDefault()
+            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+            setActive(false)
+            var evtSource = new EventSource("/update?update=" + latestVer)
+            evtSource.onmessage = function (e) {
+              //setMsg(e.data)
+              if(e.data ==  "DONE"){
+                evtSource.close()
+                setActive(true)
+                alert("It's done")
+              }
+              else{
+                setMsg(e.data)
+              }
+            }
+          }}>
+          <input type="submit" value="update" disabled={!active} />
+        </form>
       </div>
     </Layout>
   )
