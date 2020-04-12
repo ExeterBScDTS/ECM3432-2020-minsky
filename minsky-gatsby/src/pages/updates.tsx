@@ -14,6 +14,7 @@ const UpdatesPage = () => {
   const [latestVer, setLatestVer] = useState(0);
   const [msg, setMsg] = useState("dummy")
   const [progress, setProgress] = useState(0.0);
+  const [active, setActive] = useState(true);
 
   useEffect(() => {
     // get data
@@ -40,12 +41,13 @@ const UpdatesPage = () => {
           onSubmit={event => {
             event.preventDefault()
             //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+            setActive(false)
             var evtSource = new EventSource("/update?download=" + latestVer)
             evtSource.onmessage = function (e) {
               //setMsg(e.data)
               if(e.data ==  "DONE"){
                 evtSource.close()
-                //setActive(true)
+                setActive(true)
                 alert("It's done")
               }
               else{
@@ -53,7 +55,7 @@ const UpdatesPage = () => {
               }
             }
           }}>
-          <input type="submit" value="download" />
+          <input type="submit" value="download" disabled={!active} />
           <progress id="progress1" value={progress}></progress>
         </form>
       </div>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import minskyone.Updater;
 import minskyone.DownloadCallback;
 
-public class Update extends HttpServlet implements DownloadCallback{
+public class Update extends HttpServlet implements DownloadCallback {
 
     private static final long serialVersionUID = 1L;
     PrintWriter out;
@@ -26,24 +26,26 @@ public class Update extends HttpServlet implements DownloadCallback{
         resp.setCharacterEncoding("UTF-8");
 
         this.out = resp.getWriter();
-        
-        try{
+
+        try {
             String requestedVersionID = req.getParameter("download");
             URI location = Updater.getRedirect("https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/latest/");
             String[] url = location.getPath().split("/");
-            String versionID = url[url.length-1];
-            //out.println("Requested version " + requestedVersionID + " Latest version " + versionID);
-            String warURL = "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" +
-                versionID + "/minskyOne-0.2.war";
-            Updater.downloadBinary(warURL, "minskyOne-0.2.war", this);
-        }catch(Exception e){
+            String versionID = url[url.length - 1];
+            // String warURL =
+            // "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" +
+            // versionID + "/minskyOne-0.2.war";
+            String zipURL = "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" + versionID
+                    + "/minskyOne-" + versionID + ".zip";
+            Updater.downloadBinary(zipURL, "minskyOne-" + versionID + "zip", this);
+        } catch (Exception e) {
             //
         }
         this.out.write("data: DONE\n\n");
         this.out.close();
     }
 
-    public void progress(int percent){
+    public void progress(int percent) {
         this.out.write("data: " + percent + "\n\n");
         this.out.flush();
     };
