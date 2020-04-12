@@ -41,7 +41,7 @@ public class Update extends HttpServlet implements DownloadCallback {
 
                 // open the zip file stream
                 String versionID = doUpdate;
-                InputStream theFile = new FileInputStream("minskyOne-" + versionID + "zip");
+                InputStream theFile = new FileInputStream("minskyOne-" + versionID + ".zip");
                 ZipInputStream stream = new ZipInputStream(theFile);
                 this.out.write("data: UPDATE\n\n");
                 ZipEntry entry;
@@ -68,7 +68,7 @@ public class Update extends HttpServlet implements DownloadCallback {
                 // versionID + "/minskyOne-0.2.war";
                 String zipURL = "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" + versionID
                         + "/minskyOne-" + versionID + ".zip";
-                Updater.downloadBinary(zipURL, "minskyOne-" + versionID + "zip", this);
+                Updater.downloadBinary(zipURL, "minskyOne-" + versionID + ".zip", this);
             } catch (Exception e) {
                 System.err.println(e);
             }
