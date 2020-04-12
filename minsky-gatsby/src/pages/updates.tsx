@@ -13,6 +13,7 @@ const UpdatesPage = () => {
   const installedVer = "unknown";
   const [latestVer, setLatestVer] = useState(0);
   const [msg, setMsg] = useState("dummy")
+  const [progress, setProgress] = useState(0.0);
 
   useEffect(() => {
     // get data
@@ -41,10 +42,19 @@ const UpdatesPage = () => {
             //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
             var evtSource = new EventSource("/update?download=" + latestVer)
             evtSource.onmessage = function (e) {
-              setMsg(e.data)
+              //setMsg(e.data)
+              if(e.data ==  "DONE"){
+                evtSource.close()
+                //setActive(true)
+                alert("It's done")
+              }
+              else{
+                setProgress(e.data / 100)
+              }
             }
           }}>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="download" />
+          <progress id="progress1" value={progress}></progress>
         </form>
       </div>
       <div>
