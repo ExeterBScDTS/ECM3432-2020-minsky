@@ -1,5 +1,11 @@
 # ECM3432-2020-minsky
 
+## A software engineering exercise
+
+<https://travis-ci.com/ECM3432-O/ECM3432-2020-minsky>
+
+![robot picture](minsky.jpg "I can help")
+
 ## Building
 
 To run the backend of this application:
@@ -55,8 +61,4 @@ CAUSED BY:	java.lang.ClassNotFoundException: org.apache.http.protocol.HttpContex
 
 Need to add library to ```$JETTY_HOME/lib/ext``` or perhaps ```minsky-base/lib/ext```
 
-## A software engineering exercise.
 
-<https://travis-ci.com/ECM3432-O/ECM3432-2020-minsky>
-
-![robot picture](minsky.jpg "I can help"]

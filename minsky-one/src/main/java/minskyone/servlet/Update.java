@@ -1,8 +1,10 @@
 package minskyone.servlet;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.util.zip.ZipEntry;
@@ -34,27 +36,25 @@ public class Update extends HttpServlet implements DownloadCallback {
         String doUpdate = req.getParameter("update");
 
         if (doUpdate != null) {
-
-            try {
-                // create a buffer to improve copy performance later.
-                byte[] buffer = new byte[2048];
-
-                // open the zip file stream
-                String versionID = doUpdate;
-                InputStream theFile = new FileInputStream("minskyOne-" + versionID + ".zip");
-                ZipInputStream stream = new ZipInputStream(theFile);
-                this.out.write("data: UPDATE\n\n");
+            this.out.write("data: UPDATE\n\n");
+            // open the zip file stream
+            String versionID = doUpdate;
+            try (InputStream theFile = new FileInputStream("minskyOne-" + versionID + ".zip");
+                    ZipInputStream stream = new ZipInputStream(theFile);) {
                 ZipEntry entry;
-                while((entry = stream.getNextEntry())!=null)
-                {
-                        String s = String.format("Entry: %s len %d",
-                            entry.getName(), entry.getSize());
-                        System.err.println(s);
-                        this.out.write("data: " + entry.getName() + "\n\n");
+                byte[] buffer = new byte[2048];
+                while ((entry = stream.getNextEntry()) != null) {
+                    String s = String.format("Entry: %s len %d", entry.getName(), entry.getSize());
+                    System.err.println(s);
+                    this.out.write("data: " + "EXTRACTING " + entry.getName() + "\n\n");
+                    try (OutputStream output = new FileOutputStream(entry.getName());) {
+                        int len = 0;
+                        while ((len = stream.read(buffer)) > 0) {
+                            output.write(buffer, 0, len);
+                        }
+                        this.out.write("data: " + "SAVED " + entry.getName() + "\n\n");
+                    }
                 }
-
-            } catch (Exception e) {
-                System.err.println(e);
             }
         } else {
             try {
