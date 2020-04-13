@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -21,7 +25,7 @@ import minskyone.DownloadCallback;
 public class Update extends HttpServlet implements DownloadCallback {
 
     private static final long serialVersionUID = 1L;
-    PrintWriter out;
+    PrintWriter out = null;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,15 +48,24 @@ public class Update extends HttpServlet implements DownloadCallback {
                 ZipEntry entry;
                 byte[] buffer = new byte[2048];
                 while ((entry = stream.getNextEntry()) != null) {
-                    String s = String.format("Entry: %s len %d", entry.getName(), entry.getSize());
-                    System.err.println(s);
-                    this.out.write("data: " + "EXTRACTING " + entry.getName() + "\n\n");
+                    this.out.write("data: EXTRACTING " + entry.getName() + "\n\n");
                     try (OutputStream output = new FileOutputStream(entry.getName());) {
                         int len = 0;
                         while ((len = stream.read(buffer)) > 0) {
                             output.write(buffer, 0, len);
                         }
-                        this.out.write("data: " + "SAVED " + entry.getName() + "\n\n");
+                        this.out.write("data: SAVED " + entry.getName() + "\n\n");
+
+                        Path sourcePath = Paths.get(entry.getName());
+                        Path destinationPath = Paths.get("webapps/" + entry.getName());
+
+                        try {
+                            Files.move(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                            this.out.write("data: INSTALLED " + entry.getName() + "\n\n");
+                        } catch (IOException e) {
+                            // moving file failed.
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -70,7 +83,7 @@ public class Update extends HttpServlet implements DownloadCallback {
                         + "/minskyOne-" + versionID + ".zip";
                 Updater.downloadBinary(zipURL, "minskyOne-" + versionID + ".zip", this);
             } catch (Exception e) {
-                System.err.println(e);
+                e.printStackTrace();
             }
         }
         this.out.write("data: DONE\n\n");
@@ -80,5 +93,5 @@ public class Update extends HttpServlet implements DownloadCallback {
     public void progress(int percent) {
         this.out.write("data: " + percent + "\n\n");
         this.out.flush();
-    };
+    }
 }

@@ -26,24 +26,6 @@ import org.apache.http.impl.client.HttpClients;
 public class Updater {
 
     /*
-     * 
-     * @Override protected void doGet(HttpServletRequest req, HttpServletResponse
-     * resp) throws ServletException, IOException {
-     * resp.setContentType("text/plain"); PrintWriter out = resp.getWriter();
-     * 
-     * try{ URI location = this.getRedirect(
-     * "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/latest/");
-     * String[] url = location.getPath().split("/"); String versionID =
-     * url[url.length-1]; out.println("Latest version is " + versionID); String
-     * warURL =
-     * "https://github.com/ExeterBScDTS/ECM3432-2020-minsky/releases/download/" +
-     * versionID + "/minskyOne-0.2.war"; out.println(warURL);
-     * this.downloadBinary(warURL, "minskyOne-0.2.war"); }catch(Exception e){
-     * out.println(e); } out.println(); }
-     * 
-     */
-
-    /*
      * This method is not used here, but is included to show that to resolve
      * redirects and fetch the resulting page is pretty simple and doesn't require
      * the contortions used in the other methods here.
@@ -92,35 +74,31 @@ public class Updater {
         return location;
     }
 
-    public static void downloadBinary(String uri, String filename, DownloadCallback cb) throws Exception {
-        FileOutputStream out = new FileOutputStream(filename);
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpget = new HttpGet(uri);
-        CloseableHttpResponse response = httpclient.execute(httpget);
-        try {
+    public static void downloadBinary(String uri, String filename, DownloadCallback cb) throws Exception{   
+        try(
+            FileOutputStream out = new FileOutputStream(filename);
+            //CloseableHttpClient httpclient = HttpClients.createDefault();
+            //CloseableHttpResponse response = httpclient.execute(new HttpGet(uri));
+            CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(uri));
+        ) {
             HttpEntity entity = response.getEntity();
             long contentLength = entity.getContentLength();
-            if (entity != null) {
-                InputStream in = new BufferedInputStream(entity.getContent());
+            InputStream in = new BufferedInputStream(entity.getContent());
 
-                byte[] data = new byte[(int) contentLength];
-                int bytesRead = 0;
-                int offset = 0;
-                while (offset < contentLength) {
-                    cb.progress((int) (100 * offset / contentLength));
-                    bytesRead = in.read(data, offset, data.length - offset);
-                    if (bytesRead == -1)
-                        break;
-                    offset += bytesRead;
-                }
-                cb.progress(100);
-                in.close();
-                out.write(data);
-                out.flush();
-                out.close();
+            byte[] data = new byte[(int) contentLength];
+            int bytesRead = 0;
+            int offset = 0;
+            while (offset < contentLength) {
+                cb.progress((int) (100 * offset / contentLength));
+                bytesRead = in.read(data, offset, data.length - offset);
+                if (bytesRead == -1)
+                    break;
+                offset += bytesRead;
             }
-        } finally {
-            response.close();
-        }
+            cb.progress(100);
+            in.close();
+            out.write(data);
+            out.flush();
+        } 
     }
 }
