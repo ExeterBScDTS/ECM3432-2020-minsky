@@ -33,16 +33,16 @@ class Composite extends React.Component<MyProps>{
 
     private draw() {
 
-        let mov_x = this.state.x * this.width / 100;
-        let mov_y = this.state.y * this.height / 100;
+        let mov_y = (this.state.y) * this.width / 100;
+        let mov_x = (100 - this.state.x) * this.height / 100;
        
         let tir_w = 320 * (285 + this.state.scale) / 200;
         let tir_h = 240 * (285 + this.state.scale) / 200;
-        mov_x -= tir_w / 2;
-        mov_y -= tir_h / 2;
+        mov_y -= tir_w / 2;
+        mov_x -= tir_h / 2;
         this.ctx.save();
         this.ctx.clearRect(0, 0, 640, 480);
-        this.ctx.drawImage(this.tir, mov_x, mov_y, tir_w, tir_h);
+        this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
         this.ctx.restore();
         this.ctx.save();
         this.ctx.globalAlpha = 0.5;
@@ -54,7 +54,7 @@ class Composite extends React.Component<MyProps>{
         await sleep(200).then(()=>{});
         this.draw();
         window.requestAnimationFrame(() => this.autoRefresh());
-      }
+    }
     
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
@@ -69,22 +69,24 @@ class Composite extends React.Component<MyProps>{
 
     render() {
         return(
-        <>         
+        <>
+        <div>       
         <div>
         <Slider axis="y" y={this.state.y} onChange={
             ({x,y})=>{this.setState({y:y})}
-            } style={{height:480,visibility:this.state.vis}} />
-        <canvas ref="canvas" width={640} height={480}/>
+            } style={{height:640,visibility:this.state.vis}} />
+        <canvas class="image_cw" ref="canvas" width={640} height={480}/>
         </div>
         <div>
         <Slider axis="x" x={this.state.x} onChange={
             ({x,y})=>{this.setState({x:x})}
-            } style={{width:640,visibility:this.state.vis}} /> 
+            } style={{left:30,width:480,visibility:this.state.vis}} /> 
         </div>
         <div>
         <Slider axis="x" x={this.state.scale} onChange={
             ({x,y})=>{this.setState({scale:x})}
-            } style={{width:160,visibility:this.state.vis}} /> 
+            } style={{left:30,width:160,visibility:this.state.vis}} /> 
+        </div>
         </div>
         </>
         )

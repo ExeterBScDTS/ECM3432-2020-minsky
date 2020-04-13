@@ -1,0 +1,19 @@
+{
+  "name": "minksky-gatsby",
+  "private": true,
+  "description": "Gatsby front-end for Minsky",
+  "version": "0.1.0",
+  "author": "Michael Saunby <mike@saunby.net>",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "main": "(cd ./minsky-gatsby && yarn && yarn build) && (cd ./minsky-one && mvn package && mvn jetty:run)",
+    "build": "cd ./minsky-gatsby && yarn && yarn build",
+    "frontend": "cd ./minsky-gatsby && yarn && yarn develop"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-cli": "^2.11.2"
+  }
+}

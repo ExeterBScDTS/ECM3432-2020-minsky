@@ -62,11 +62,12 @@ class Histogram{
  
    setheight(n:number,h:number,fill:string,max_height:number){
       var SVGObj= <SVGRectElement><any>document.getElementById("r_" + n);
-      //SVGObj.width.baseVal.value=17;
-      SVGObj.height.baseVal.value=h;
-      //SVGObj.x.baseVal.value=1;
-      SVGObj.style.fill=fill;
-      SVGObj.setAttribute("transform","translate(" + (n * 18) + "," + (max_height - h) + ")");
+      if(SVGObj) {
+        SVGObj.height.baseVal.value=h;
+        //SVGObj.x.baseVal.value=1;
+        SVGObj.style.fill=fill;
+        SVGObj.setAttribute("transform","translate(" + (n * 18) + "," + (max_height - h) + ")");
+        }
    }
  
    async redraw():Promise<void>{

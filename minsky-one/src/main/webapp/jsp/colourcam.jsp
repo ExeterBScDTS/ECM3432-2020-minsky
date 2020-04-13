@@ -1,6 +1,6 @@
 <%@page import="minskyone.Utils,java.io.*" language="java" contentType="image/png" %><%
 
-  // Important.  Formating of JSP is critical to this script.
+  // Important.  Formatting of JSP is critical to this script.
   // No whitespace should be present outside the delimiters, not even a newline at the end!
   //
 

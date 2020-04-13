@@ -67,6 +67,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>version</servlet-name>
+    <jsp-file>/jsp/version.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>version</servlet-name>
+    <url-pattern>/version.json</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
      <servlet-name>props</servlet-name>
      <servlet-class>minskyone.servlet.Props</servlet-class>
   </servlet>
@@ -91,6 +100,24 @@
   <servlet-mapping>
      <servlet-name>histogram</servlet-name>
      <url-pattern>/histogram/*</url-pattern>
+  </servlet-mapping>  
+
+   <servlet>
+     <servlet-name>update</servlet-name>
+     <servlet-class>minskyone.servlet.Update</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>update</servlet-name>
+     <url-pattern>/update</url-pattern>
+  </servlet-mapping>  
+
+  <servlet>
+     <servlet-name>event</servlet-name>
+     <servlet-class>minskyone.servlet.EventSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>event</servlet-name>
+     <url-pattern>/event</url-pattern>
   </servlet-mapping>  
 
  <login-config>
