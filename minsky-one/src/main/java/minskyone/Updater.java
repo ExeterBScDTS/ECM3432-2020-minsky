@@ -1,6 +1,8 @@
 package minskyone;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 /*
  Resources 
@@ -12,7 +14,11 @@ import java.io.FileOutputStream;
 
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -63,7 +69,7 @@ public class Updater {
      * 
      */
 
-    public static URI getRedirect(String uri) throws Exception {
+    public static URI getRedirect(String uri) throws Exception{
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpClientContext context = HttpClientContext.create();
         HttpGet httpget = new HttpGet(uri);
@@ -72,6 +78,15 @@ public class Updater {
         List<URI> redirectLocations = context.getRedirectLocations();
         URI location = URIUtils.resolve(httpget.getURI(), target, redirectLocations);
         return location;
+    }
+
+    public static String getInstalledVer() throws Exception{
+        String releaseMsg = "Hi there";
+        try (Stream<String> stream = Files.lines(Paths.get("webapps/" + "minskyOne-release.txt"))) {
+  
+            releaseMsg = stream.findFirst().get();
+        }
+        return releaseMsg;
     }
 
     public static void downloadBinary(String uri, String filename, DownloadCallback cb) throws Exception{   
