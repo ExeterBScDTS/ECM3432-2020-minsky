@@ -59,6 +59,6 @@ CAUSED BY:	java.lang.NoClassDefFoundError: org/apache/http/protocol/HttpContext
 CAUSED BY:	java.lang.ClassNotFoundException: org.apache.http.protocol.HttpContext
 ```
 
-Need to add library to ```$JETTY_HOME/lib/ext``` or perhaps ```minsky-base/lib/ext```
+This was resolved by including library jars in the war file.  See ```pom.xml```
 
 

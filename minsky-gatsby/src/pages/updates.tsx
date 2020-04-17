@@ -10,11 +10,11 @@ import { useState, useEffect } from "react"
 */
 
 const UpdatesPage = () => {
-  const installedVer = "unknown";
-  const [latestVer, setLatestVer] = useState(0);
+  const [installedVer, setInstalledVer] = useState(0)
+  const [latestVer, setLatestVer] = useState(0)
   const [msg, setMsg] = useState("dummy")
-  const [progress, setProgress] = useState(0.0);
-  const [active, setActive] = useState(true);
+  const [progress, setProgress] = useState(0.0)
+  const [active, setActive] = useState(true)
 
   useEffect(() => {
     // get data
@@ -22,6 +22,7 @@ const UpdatesPage = () => {
       .then(response => response.json())
       .then(resultData => {
         setLatestVer(resultData.latest)
+        setInstalledVer(resultData.current)
       })
   }, [])
 
