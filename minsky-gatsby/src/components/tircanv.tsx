@@ -22,9 +22,6 @@ class TirCanv extends React.Component<MyProps> {
         t.draw();
     }
 
-    printNum(v:number){
-        console.log("TirCanv, printNum:", v);
-    }
 
     render() { 
         return(

@@ -26,6 +26,10 @@ class TIRCanvas {
     return this.canvas
   }
 
+  printNum(v:number){
+    console.log("TIRCanvas, printNum:", v);
+  }
+
   palIdx(v:number):number{
     if (v < this.mint) v=this.mint;
     if (v > this.maxt) v=this.maxt;

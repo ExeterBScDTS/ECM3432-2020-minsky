@@ -76,7 +76,7 @@ class Composite extends React.Component<MyProps>{
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
         this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
-        this.tir = document.getElementById(this.props.tir) as HTMLImageElement;
+        //this.tir = document.getElementById(this.props.tir) as HTMLImageElement;
         if (this.props.controls == "off") {
             this.setState({ vis: "hidden" });
         }
