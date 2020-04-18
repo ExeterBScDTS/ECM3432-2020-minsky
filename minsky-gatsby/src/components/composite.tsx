@@ -31,7 +31,8 @@ class Composite extends React.Component<MyProps>{
 
     state = {
         x: 50, y: 50, scale: 50,
-        min: 10, max: 10,
+        min: 10, 
+        max: 10,
         vis: "visible"
     }
 
@@ -69,7 +70,7 @@ class Composite extends React.Component<MyProps>{
         tir_canv.id = 'dummy'
         tir_canv.height = 240
         tir_canv.width = 320
-        let p = new Palette(100);
+        let p = new Palette(512);
         this.tirC = new TIRCanvas(tir_canv, p, "/tir.json");
         this.tirC.draw();
        
@@ -105,14 +106,17 @@ class Composite extends React.Component<MyProps>{
                     </div>
                     <div style={{ visibility: this.state.vis }}>
                         Min <Slider axis="x" x={this.state.min}
-                            onChange={({ x, y }) => { this.setState({ min: x }) }}
+                            onChange={({ x, y }) => { 
+                                this.setState({ min: x })
+                                this.tirC.setMin(x)
+                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
                     <div style={{ visibility: this.state.vis }}>
                         Max <Slider axis="x" x={this.state.max}
                             onChange={({ x, y }) => { 
                                 this.setState({ max: x })
-                                this.tirC.printNum(x)
+                                this.tirC.setMax(x)
                              }}
                             style={{ left: 30, width: 160 }} />
                     </div>
