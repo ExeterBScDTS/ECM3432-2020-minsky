@@ -22,6 +22,10 @@ class TirCanv extends React.Component<MyProps> {
         t.draw();
     }
 
+    printNum(v:number){
+        console.log("TirCanv, printNum:", v);
+    }
+
     render() { 
         return(
         <canvas ref="canvas" width={320} height={240} id={this.props.id}/>

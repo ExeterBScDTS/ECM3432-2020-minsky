@@ -1,6 +1,7 @@
 import * as React from "react"
 // https://www.npmjs.com/package/react-input-slider
 import Slider from 'react-input-slider';
+import TirCanv from "../components/tircanv";
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -20,6 +21,7 @@ class Composite extends React.Component<MyProps>{
     private ctx: CanvasRenderingContext2D;
     private rgb: HTMLImageElement;
     private tir: HTMLImageElement;
+    private tirC: TirCanv;
     private tir_width = 320;
     private tir_height = 240;
     private uri: string;
@@ -31,6 +33,8 @@ class Composite extends React.Component<MyProps>{
         min: 10, max: 10,
         vis: "visible"
     }
+
+    
 
     private draw() {
 
@@ -69,6 +73,7 @@ class Composite extends React.Component<MyProps>{
     }
 
     render() {
+        this.tirC = new TirCanv({id:"xx", pal:100});
         return (
             <>
                 <div>
@@ -95,7 +100,10 @@ class Composite extends React.Component<MyProps>{
                     </div>
                     <div style={{ visibility: this.state.vis }}>
                         Max <Slider axis="x" x={this.state.max}
-                            onChange={({ x, y }) => { this.setState({ max: x }) }}
+                            onChange={({ x, y }) => { 
+                                this.setState({ max: x })
+                                this.tirC.printNum(x)
+                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
                 </div>
