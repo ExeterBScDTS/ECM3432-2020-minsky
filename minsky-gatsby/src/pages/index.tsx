@@ -10,10 +10,10 @@ const IndexPage = () => (
   
             <div className="row" style={{visibility:"hidden",height:"0px"}} >
               <RgbCanv id="rgb" />
-              <TirCanv id="tir" />
+              <TirCanv id="tir" pal={512} />
             </div>
               <div>
-                <Composite tir="tir" rgb="rgb" controls="off"/>
+                <Composite id="comp" tir="tir" rgb="rgb" controls="off"/>
               </div>
 </Layout>
 )

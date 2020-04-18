@@ -8,7 +8,8 @@ import {TIRCanvas} from "./tircanvas"
 // And https://www.gatsbyjs.org/docs/static-folder/
 
 export interface MyProps {
-    id: string
+    id: string,
+    pal: number,
   }
 
 class TirCanv extends React.Component<MyProps> {
@@ -16,7 +17,7 @@ class TirCanv extends React.Component<MyProps> {
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
 
-        let p = new Palette(512);
+        let p = new Palette(this.props.pal);
         let t:TIRCanvas = new TIRCanvas(canvas, p, "/tir.json");
         t.draw();
     }

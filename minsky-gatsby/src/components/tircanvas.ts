@@ -8,8 +8,11 @@ class TIRCanvas {
   private readonly ctx: CanvasRenderingContext2D;
   private readonly pal: Palette;
   private readonly uri: string;
-  private mint = 0.0;
-  private maxt = 50.0;
+  //private mint = 0.0;
+  //private maxt = 50.0;
+
+  private mint = 14.0;
+  private maxt = 25.0;
 
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string) {
     this.ctx = canvas.getContext('2d');
