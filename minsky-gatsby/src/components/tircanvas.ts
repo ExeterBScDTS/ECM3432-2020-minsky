@@ -5,19 +5,25 @@ async function sleep(ms:number):Promise<number> {
 }
 
 class TIRCanvas {
-  private readonly ctx: CanvasRenderingContext2D;
-  private readonly pal: Palette;
-  private readonly uri: string;
-  //private mint = 0.0;
-  //private maxt = 50.0;
+  private readonly ctx: CanvasRenderingContext2D
+  private readonly pal: Palette
+  private readonly uri: string
+  private readonly canvas: HTMLCanvasElement
+  //private mint = 0.0
+  //private maxt = 50.0
 
-  private mint = 14.0;
-  private maxt = 25.0;
+  private mint = 14.0
+  private maxt = 25.0
 
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string) {
-    this.ctx = canvas.getContext('2d');
-    this.pal = palette;
-    this.uri = uri;
+    this.canvas = canvas
+    this.ctx = canvas.getContext('2d')
+    this.pal = palette
+    this.uri = uri
+  }
+
+  getCanv(){
+    return this.canvas
   }
 
   palIdx(v:number):number{

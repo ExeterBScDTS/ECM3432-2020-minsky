@@ -1,7 +1,8 @@
 import * as React from "react"
 // https://www.npmjs.com/package/react-input-slider
-import Slider from 'react-input-slider';
-import TirCanv from "../components/tircanv";
+import Slider from 'react-input-slider'
+import {TIRCanvas} from "./tircanvas"
+import {Palette} from "./palette"
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -21,7 +22,7 @@ class Composite extends React.Component<MyProps>{
     private ctx: CanvasRenderingContext2D;
     private rgb: HTMLImageElement;
     private tir: HTMLImageElement;
-    private tirC: TirCanv;
+    private tirC: TIRCanvas;
     private tir_width = 320;
     private tir_height = 240;
     private uri: string;
@@ -47,7 +48,8 @@ class Composite extends React.Component<MyProps>{
         mov_x -= tir_h / 2;
         this.ctx.save();
         this.ctx.clearRect(0, 0, 640, 480);
-        this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
+        //this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
+        this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);
         this.ctx.restore();
         this.ctx.save();
         this.ctx.globalAlpha = 0.5;
@@ -62,6 +64,15 @@ class Composite extends React.Component<MyProps>{
     }
 
     componentDidMount() {
+
+        const tir_canv = document.createElement('canvas')
+        tir_canv.id = 'dummy'
+        tir_canv.height = 240
+        tir_canv.width = 320
+        let p = new Palette(100);
+        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json");
+        this.tirC.draw();
+       
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
         this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
@@ -73,7 +84,6 @@ class Composite extends React.Component<MyProps>{
     }
 
     render() {
-        this.tirC = new TirCanv({id:"xx", pal:100});
         return (
             <>
                 <div>
