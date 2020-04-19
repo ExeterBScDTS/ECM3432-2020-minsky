@@ -4,6 +4,7 @@ class Palette{
 
     constructor(length:number){
         this.setLength(length);
+        console.log("New Palette, len:", length);
     }
 
     setLength(n:number){

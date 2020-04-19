@@ -5,23 +5,41 @@ async function sleep(ms:number):Promise<number> {
 }
 
 class TIRCanvas {
-  private readonly ctx: CanvasRenderingContext2D;
-  private readonly pal: Palette;
-  private readonly uri: string;
-  private mint = 0.0;
-  private maxt = 50.0;
+  private readonly ctx: CanvasRenderingContext2D
+  private readonly pal: Palette
+  private readonly uri: string
+  private readonly canvas: HTMLCanvasElement
+  private mint = 0.0
+  private maxt = 50.0
 
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string) {
-    this.ctx = canvas.getContext('2d');
-    this.pal = palette;
-    this.uri = uri;
+    this.canvas = canvas
+    this.ctx = canvas.getContext('2d')
+    this.pal = palette
+    this.uri = uri
+  }
+
+  getCanv(){
+    return this.canvas
+  }
+
+  setMin(m:number){
+    this.mint = m
+  }
+
+  setMax(m:number){
+    this.maxt = m
   }
 
   palIdx(v:number):number{
-    if (v < this.mint) v=this.mint;
-    if (v > this.maxt) v=this.maxt;
-    let p = (v-this.mint) * (this.pal.getLength()/(this.maxt-this.mint));
-    return ~~p;
+    //if (v < this.mint) v=this.mint;
+    //if (v > this.maxt) v=this.maxt;
+    let p = (v-this.mint)/(this.maxt-this.mint)
+    p = p * this.pal.getLength()
+    //console.log(p,this.mint,this.maxt)
+    if (p < 0) p = 0
+    if (p >= this.pal.getLength()) p = this.pal.getLength()-1
+    return ~~p
   }
 
   getColour(v:number):string{
@@ -48,7 +66,7 @@ class TIRCanvas {
 
   static main(selector:string, uri:string) {
 
-    let p = new Palette(512);
+    //let p = new Palette(512);
     //let c = <HTMLCanvasElement> document.querySelector(selector);
     //let t = new TIRCanvas(c,p,uri);
     //t.draw();

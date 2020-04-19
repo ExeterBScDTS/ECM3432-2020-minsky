@@ -12,11 +12,11 @@ const CamerasPage = () => (
       <Link className="btn btn-outline-secondary" to="/updates">Check for updates</Link>
     </div>
     <div className="row">
-      <Composite tir="tir" rgb="rgb" />    
+      <Composite id="comp" tir="tir" rgb="rgb" controls="on" />    
     </div>
     <div style={{visibility:"hidden"}}>
       <RgbCanv id="rgb" />
-      <TirCanv id="tir" />
+      <TirCanv id="tir" pal={512} />
     </div>
   </Layout>
 )
