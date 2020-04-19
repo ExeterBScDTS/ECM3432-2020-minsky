@@ -93,6 +93,7 @@
      <url-pattern>/camera/*</url-pattern>
   </servlet-mapping>  
 
+<!--
   <servlet>
      <servlet-name>histogram</servlet-name>
      <servlet-class>minskyone.servlet.Histogram</servlet-class>
@@ -101,6 +102,7 @@
      <servlet-name>histogram</servlet-name>
      <url-pattern>/histogram/*</url-pattern>
   </servlet-mapping>  
+-->
 
    <servlet>
      <servlet-name>update</servlet-name>
