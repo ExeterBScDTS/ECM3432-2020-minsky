@@ -31,8 +31,8 @@ class Composite extends React.Component<MyProps>{
 
     state = {
         x: 50, y: 50, scale: 50,
-        min: 10, 
-        max: 10,
+        min: 0, 
+        max: 50,
         vis: "visible"
     }
 
@@ -109,6 +109,9 @@ class Composite extends React.Component<MyProps>{
                             onChange={({ x, y }) => { 
                                 this.setState({ min: x })
                                 this.tirC.setMin(x)
+                                if (this.state.min > this.state.max){
+                                    this.setState({max: this.state.min})
+                                }
                              }}
                             style={{ left: 30, width: 160 }} />
                     </div>
@@ -117,6 +120,9 @@ class Composite extends React.Component<MyProps>{
                             onChange={({ x, y }) => { 
                                 this.setState({ max: x })
                                 this.tirC.setMax(x)
+                                if (this.state.max < this.state.min){
+                                    this.setState({min: this.state.max})
+                                }
                              }}
                             style={{ left: 30, width: 160 }} />
                     </div>

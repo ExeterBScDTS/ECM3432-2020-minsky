@@ -9,11 +9,8 @@ class TIRCanvas {
   private readonly pal: Palette
   private readonly uri: string
   private readonly canvas: HTMLCanvasElement
-  //private mint = 0.0
-  //private maxt = 50.0
-
-  private mint = 0
-  private maxt = 0
+  private mint = 0.0
+  private maxt = 50.0
 
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string) {
     this.canvas = canvas
