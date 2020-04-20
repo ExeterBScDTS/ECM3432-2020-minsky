@@ -84,6 +84,15 @@
      <url-pattern>/props/*</url-pattern>
   </servlet-mapping>   
 
+ <servlet>
+     <servlet-name>dbstatus</servlet-name>
+     <servlet-class>minskyone.servlet.DBStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>dbstatus</servlet-name>
+     <url-pattern>/dbstatus/*</url-pattern>
+  </servlet-mapping> 
+
   <servlet>
      <servlet-name>camera</servlet-name>
      <servlet-class>minskyone.servlet.Camera</servlet-class>

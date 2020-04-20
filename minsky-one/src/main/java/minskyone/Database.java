@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
+// Suggest fileName = "test.db"
 public class Database {
 
         /**
@@ -15,7 +17,7 @@ public class Database {
      */
     public static void createNewDatabase(String fileName) throws SQLException{
  
-        String url = "jdbc:sqlite:/tmp/" + fileName;
+        String url = "jdbc:sqlite:./" + fileName;
  
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
@@ -27,9 +29,9 @@ public class Database {
     }
  
 
-    public static void createNewTable() {
+    public static void createNewTable(String fileName) {
         // SQLite connection string
-        String url = "jdbc:sqlite:/tmp/test.db";
+        String url = "jdbc:sqlite:./" + fileName;
         
         // SQL statement for creating a new table.
         // Tables spec from sample jdbcReal.properties included with Jetty.
