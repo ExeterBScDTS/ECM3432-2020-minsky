@@ -34,13 +34,19 @@ public class DBStatus extends HttpServlet {
         out.printf("file.Paths.get for / =%s%n", realPath);
         context(out, req);
 
+        minskyone.Database db = new minskyone.Database();
         try{
-            minskyone.Database db = new minskyone.Database();
             db.createNewDatabase();
             minskyone.Database.createNewTable("test.db");
         } catch(SQLException e){
             e.printStackTrace();
-        } 
+        }
+        db.insert("cat", "Willow");
+        try{
+            db.getSettings();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }   
 
         // info(out,req.getPathInfo());
         //String urlPath[]= req.getPathInfo().split("/");
