@@ -8,8 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import java.util.Map;
+import java.util.HashMap;
+
 // Suggest fileName = "test.db"
 public class Database {
+
+    private Map<String,String> settings;
 
     private Connection connect() {
         // SQLite connection string
@@ -44,25 +49,13 @@ public class Database {
         // SQLite connection string
         String url = "jdbc:sqlite:./" + fileName;
 
-        // SQL statement for creating a new table.
-        // Tables spec from sample jdbcReal.properties included with Jetty.
-
         String sql_tables = "create table settings  (\n" 
                 + "     name varchar(100) not null primary key,\n"
                 + "     value varchar(100)\n" + " );";
 
-        /*
-         * String sql_test_data = "insert into users values (1, 'admin', 'password');" +
-         * "insert into roles values (1, 'server-administrator');" +
-         * "insert into roles values (2, 'content-administrator');" +
-         * "insert into user_roles values (1, 1);" +
-         * "insert into user_roles values (1, 2);";
-         */
-
         try (Connection conn = DriverManager.getConnection(url); Statement stmt = conn.createStatement()) {
-            // create a new table
+            // create table
             stmt.execute(sql_tables);
-            // stmt.execute(sql_test_data);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,35 +75,16 @@ public class Database {
     }
 
     public void getSettings() throws SQLException {
+        settings = new HashMap<String,String>();
         String query = "select NAME, VALUE " + "from SETTINGS";
         try (Connection conn = this.connect(); Statement stmt = conn.createStatement();) {
             try (ResultSet rs = stmt.executeQuery(query);) {
                 // Iterate through the data
                 while (rs.next()) {
-                    System.out.println("NAME: " + rs.getObject(1));
-                    System.out.println("VALUE: " + rs.getObject(2));
+                    settings.put(rs.getString(1),rs.getString(2));
+                    System.out.println(settings);
                 }
             }
         }
     }
-
-    /*
-     * public List<Screening> getScreenings() { //String query =
-     * "select * from SCREENINGS"; String query =
-     * "select SCREENING_ID, DATE, NAME, TITLE " + " from SCREENINGS " +
-     * " INNER JOIN FILMS ON SCREENINGS.FILM_ID=FILMS.FILM_ID " +
-     * " INNER JOIN VENUES ON SCREENINGS.VENUE_ID=VENUES.VENUE_ID"; List<Screening>
-     * screenings = new ArrayList<Screening>(); try (Connection conn =
-     * this.connect(); Statement stmt = conn.createStatement();) { try (ResultSet rs
-     * = stmt.executeQuery(query);){ // Iterate through the data while(rs.next()){
-     * System.out.println("ID: " + rs.getObject(1)); System.out.println("Date: " +
-     * rs.getObject(2)); System.out.println("Venue: " + rs.getObject(3));
-     * System.out.println("Film: " + rs.getObject(4)); screenings.add(new
-     * Screening(rs.getInt(1),(Date)rs.getObject(2),rs.getString(3),rs.getString(4))
-     * ); }
-     * 
-     * } // Handle any errors that may have occurred. } catch (SQLException e) {
-     * e.printStackTrace(); } return screenings; }
-     */
-
 }
