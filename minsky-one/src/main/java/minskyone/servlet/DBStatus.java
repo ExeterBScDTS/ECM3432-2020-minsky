@@ -13,6 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/*
+
+Be sure to include a load-on-startup for this servlet. Like this -
+
+ <servlet>
+     <servlet-name>dbstatus</servlet-name>
+     <servlet-class>minskyone.servlet.DBStatus</servlet-class>
+     <load-on-startup>1</load-on-startup>
+  </servlet>
+
+ */ 
+
 public class DBStatus extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
