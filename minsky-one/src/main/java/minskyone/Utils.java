@@ -2,7 +2,12 @@ package minskyone;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.StringReader;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.json.*;
 
 public class Utils {
@@ -63,4 +68,24 @@ public class Utils {
         JsonObject value = builder.build();
         return(value.toString());
     }
+
+    public static Map<String,String> jsonMap(String encoded){
+
+        Map<String,String> map = new HashMap<String,String>();
+
+        System.out.println("Utils.jsonMap: decoding-" + encoded);
+        JsonReader rdr = Json.createReader(new StringReader(encoded));
+        JsonStructure object = rdr.read();
+        rdr.close();
+        
+        // For better example 
+        // see https://stackoverflow.com/questions/29235117/from-json-string-to-java-object-using-javax-json
+        for (Entry<String, JsonValue> entry : ((JsonObject)object).entrySet()) {
+            map.put(entry.getKey(), ((JsonNumber)(entry.getValue())).toString());
+            //map.put(entry.getKey(), ((JsonString)(entry.getValue())).toString());
+        }
+        return map;
+    }
+
+
 }

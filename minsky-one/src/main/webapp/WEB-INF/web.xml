@@ -97,6 +97,15 @@
   </servlet-mapping> 
 
   <servlet>
+     <servlet-name>settings</servlet-name>
+     <servlet-class>minskyone.servlet.Settings</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>settings</servlet-name>
+     <url-pattern>/settings/*</url-pattern>
+  </servlet-mapping> 
+
+  <servlet>
      <servlet-name>camera</servlet-name>
      <servlet-class>minskyone.servlet.Camera</servlet-class>
   </servlet>

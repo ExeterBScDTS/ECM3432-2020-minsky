@@ -45,19 +45,16 @@ public class Database {
         }
     }
 
-    public static void createNewTable(String fileName) {
+    public void createNewTable() throws SQLException {
         // SQLite connection string
-        String url = "jdbc:sqlite:./" + fileName;
-
+   
         String sql_tables = "create table settings  (\n" 
                 + "     name varchar(100) not null primary key,\n"
                 + "     value varchar(100)\n" + " );";
 
-        try (Connection conn = DriverManager.getConnection(url); Statement stmt = conn.createStatement()) {
+        try (Connection conn = this.connect(); Statement stmt = conn.createStatement()) {
             // create table
             stmt.execute(sql_tables);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -70,7 +67,6 @@ public class Database {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            ;
         }
     }
 

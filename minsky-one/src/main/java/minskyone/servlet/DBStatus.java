@@ -37,7 +37,7 @@ public class DBStatus extends HttpServlet {
         db = new minskyone.Database();
         try{
             db.createNewDatabase();
-            minskyone.Database.createNewTable("test.db");
+            db.createNewTable();
         } catch(SQLException e){
             e.printStackTrace();
         }   

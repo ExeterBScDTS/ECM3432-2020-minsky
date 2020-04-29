@@ -13,7 +13,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- Jetty version from
            https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-maven-plugin/
-        <jettyVersion>9.4.22.v20191022</jettyVersion>
         -->
         <jettyVersion>9.4.27.v20200227</jettyVersion>
     </properties>
@@ -26,6 +25,13 @@
             <scope>provided</scope>
         </dependency>
 
+<!--
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+-->
         <!--
         <dependency>
             <groupId>javax.json</groupId>
@@ -133,13 +139,26 @@
         
         <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp -->
 
-<!--
+<!-- Required for embedded server 
     <dependency>
         <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-jsp</artifactId>
-        <version>${jettyVersion}</version>
+        <artifactId>apache-jsp</artifactId>
+         <version>${jettyVersion}</version>
     </dependency>
+<dependency>
+  <groupId>org.eclipse.jetty</groupId>
+  <artifactId>jetty-annotations</artifactId>
+   <version>${jettyVersion}</version>
+</dependency>
+
+<dependency>
+  <groupId>org.eclipse.jetty</groupId>
+  <artifactId>apache-jstl</artifactId>
+   <version>${jettyVersion}</version>
+</dependency>
+
 -->
+
 
     </dependencies>
 
