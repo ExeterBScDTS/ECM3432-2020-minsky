@@ -1,6 +1,9 @@
 language: java
 jdk:
 - openjdk11
+language: node_js
+node_js:
+- lts/*
 script:
 - (cd minsky-gatsby && yarn install && yarn build) 
 - (cd minsky-one && mvn package; export MAVEN_RESULT=$?)
