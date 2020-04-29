@@ -59,7 +59,7 @@ public class Database {
     }
 
     public void insert(String name, String value) {
-        String sql = "INSERT INTO settings(name,value) VALUES(?,?)";
+        String sql = "INSERT OR REPLACE INTO settings(name,value) VALUES(?,?)";
 
         try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
@@ -77,10 +77,10 @@ public class Database {
             try (ResultSet rs = stmt.executeQuery(query);) {
                 // Iterate through the data
                 while (rs.next()) {
-                    settings.put(rs.getString(1),rs.getString(2));
-                    System.out.println(settings);
+                    settings.put(rs.getString(1),rs.getString(2));   
                 }
             }
         }
+        System.out.println(settings);
     }
 }

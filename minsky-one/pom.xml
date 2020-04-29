@@ -18,12 +18,14 @@
     </properties>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
+        -->
 
 <!--
         <dependency>
@@ -100,11 +102,13 @@
             <version>${jettyVersion}</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>${jettyVersion}</version>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.eclipse.jetty</groupId>

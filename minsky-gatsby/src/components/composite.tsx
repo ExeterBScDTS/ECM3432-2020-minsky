@@ -133,26 +133,29 @@ class Composite extends React.Component<MyProps>{
                             //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
                             // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-                            const data = {"tir.min": 12, "tir.max": 35};
+                            const data = {
+                                "tir.min": this.state.min, "tir.max": this.state.max,
+                                "tir.x": this.state.x, "tir.y": this.state.y, "tir.scale": this.state.scale,
+                            };
 
                             fetch('/settings', {
-                              method: 'POST', // or 'PUT'
-                              headers: {
-                                'Content-Type': 'application/json',
-                              },
-                              body: JSON.stringify(data),
+                                method: 'POST', // or 'PUT'
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
                             })
-                            .then((response) => {
-                                console.log("response", response)
-                                return response.json()
-                            })
-                            .then((data) => {
-                              console.log('Success:', data);
-                            })
-                            .catch((error) => {
-                              console.error('Error:', error);
-                            });
-                            
+                                .then((response) => {
+                                    console.log("response", response)
+                                    return response.json()
+                                })
+                                .then((data) => {
+                                    console.log('Success:', data);
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+
 
                         }}>
                         <input type="submit" value="save" />

@@ -48,21 +48,14 @@ public class Settings extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
 
-        //Map<String,String> dict = new HashMap<String,String>();
-
         String encData = req.getReader().lines().collect(Collectors.joining());
 
         System.out.println("Settings: " + encData);
 
         Map<String,String> dict = minskyone.Utils.jsonMap(encData);
 
-        //Map<String,String[]> params = req.getParameterMap();
+        dict.forEach((k,v) -> db.insert(k, v));
 
-        //params.forEach((k,v) -> dict.put(k,v[0]));
-        //dict.put("tir.min", "10");
-        //dict.put("tir.max", "30");
-        //String jsontext = minskyone.Utils.jsonNameValue(dict);
-        //out.print(encData);
         out.print(minskyone.Utils.jsonNameValue(dict));
     }
 }
