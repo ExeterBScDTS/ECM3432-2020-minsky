@@ -51,6 +51,8 @@ class Composite extends React.Component<MyProps>{
         this.ctx.save();
         this.ctx.clearRect(0, 0, 640, 480);
         //this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
+        this.tirC.setMin(this.state.min)
+        this.tirC.setMax(this.state.max)
         this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);
         this.ctx.restore();
         this.ctx.save();
