@@ -14,7 +14,7 @@ import java.util.HashMap;
 // Suggest fileName = "test.db"
 public class Database {
 
-    private Map<String,String> settings;
+    private Map<String, String> settings;
 
     private Connection connect() {
         // SQLite connection string
@@ -47,9 +47,8 @@ public class Database {
 
     public void createNewTable() throws SQLException {
         // SQLite connection string
-   
-        String sql_tables = "create table settings  (\n" 
-                + "     name varchar(100) not null primary key,\n"
+
+        String sql_tables = "create table settings  (\n" + "     name varchar(100) not null primary key,\n"
                 + "     value varchar(100)\n" + " );";
 
         try (Connection conn = this.connect(); Statement stmt = conn.createStatement()) {
@@ -70,17 +69,20 @@ public class Database {
         }
     }
 
-    public void getSettings() throws SQLException {
-        settings = new HashMap<String,String>();
+    final public Map<String, String> getSettings() {
+        this.settings = new HashMap<String, String>();
         String query = "select NAME, VALUE " + "from SETTINGS";
-        try (Connection conn = this.connect(); Statement stmt = conn.createStatement();) {
-            try (ResultSet rs = stmt.executeQuery(query);) {
-                // Iterate through the data
-                while (rs.next()) {
-                    settings.put(rs.getString(1),rs.getString(2));   
-                }
+        try (Connection conn = this.connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);) {
+            // Iterate through the data
+            while (rs.next()) {
+                this.settings.put(rs.getString(1), rs.getString(2));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        System.out.println(settings);
+        // System.out.println(settings);
+        return this.settings;
     }
 }

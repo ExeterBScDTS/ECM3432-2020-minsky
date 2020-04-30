@@ -160,6 +160,33 @@ class Composite extends React.Component<MyProps>{
                         }}>
                         <input type="submit" value="save" />
                     </form>
+                    <form
+                        onSubmit={event => {
+                            event.preventDefault()
+                            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+                            // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+                            fetch('/settings', {
+                                method: 'POST', // or 'PUT'
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                                .then((response) => {
+                                    //console.log("response", response)
+                                    response.json().then(data => {console.log(data)})
+                                })
+                                .then((data) => {
+                                    console.log('Success:', data);
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+
+
+                        }}>
+                        <input type="submit" value="load" />
+                    </form>
                 </div>
             </>
         )

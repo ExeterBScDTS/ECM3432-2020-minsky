@@ -41,12 +41,8 @@ public class DBStatus extends HttpServlet {
         } catch(SQLException e){
             e.printStackTrace();
         }   
-        try{
-            db.getSettings();
-        } catch(SQLException e){
-            e.printStackTrace();
-        }      
 
+        db.getSettings();
     }
 
     @Override
@@ -67,12 +63,7 @@ public class DBStatus extends HttpServlet {
         realPath = java.nio.file.Paths.get("/").toAbsolutePath().toString();
         out.printf("file.Paths.get for / =%s%n", realPath);
 
-        //db.insert("cat", "Willow");
-        try{
-            db.getSettings();
-        } catch(SQLException e){
-            e.printStackTrace();
-        } 
+        db.getSettings();
     }
 
 }
