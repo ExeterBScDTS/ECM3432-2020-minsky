@@ -146,7 +146,6 @@ class Composite extends React.Component<MyProps>{
                                 body: JSON.stringify(data),
                             })
                                 .then((response) => {
-                                    console.log("response", response)
                                     return response.json()
                                 })
                                 .then((data) => {
@@ -173,11 +172,12 @@ class Composite extends React.Component<MyProps>{
                                 },
                             })
                                 .then((response) => {
-                                    //console.log("response", response)
-                                    response.json().then(data => {console.log(data)})
+                                    return response.json()
                                 })
                                 .then((data) => {
-                                    console.log('Success:', data);
+                                    console.log('Loaded:', data)
+                                    this.setState({"min":Number(data["tir.min"])})
+                                    this.setState({"max":Number(data["tir.max"])})
                                 })
                                 .catch((error) => {
                                     console.error('Error:', error);

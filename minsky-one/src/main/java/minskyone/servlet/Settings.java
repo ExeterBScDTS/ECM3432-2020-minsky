@@ -46,7 +46,7 @@ public class Settings extends HttpServlet {
         String encData = req.getReader().lines().collect(Collectors.joining());
 
         if (!encData.equals("")) {
-            System.out.println("Settings: " + encData);
+            System.out.println("Settings. Set: " + encData);
 
             Map<String, String> dict = minskyone.Utils.jsonMap(encData);
 
@@ -54,6 +54,7 @@ public class Settings extends HttpServlet {
             out.print(minskyone.Utils.jsonNameValue(dict));
         } else {
             Map<String, String> dict = db.getSettings();
+            System.out.println("Settings. Get: " + dict.toString());
             out.print(minskyone.Utils.jsonNameValue(dict));
         }
     }

@@ -81,8 +81,12 @@ public class Utils {
         // For better example 
         // see https://stackoverflow.com/questions/29235117/from-json-string-to-java-object-using-javax-json
         for (Entry<String, JsonValue> entry : ((JsonObject)object).entrySet()) {
+            try{
             map.put(entry.getKey(), ((JsonNumber)(entry.getValue())).toString());
-            //map.put(entry.getKey(), ((JsonString)(entry.getValue())).toString());
+            }catch(ClassCastException e){
+                e.printStackTrace();
+                map.put(entry.getKey(), ((JsonString)(entry.getValue())).toString());
+            }
         }
         return map;
     }
