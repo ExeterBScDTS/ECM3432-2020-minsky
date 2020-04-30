@@ -45,6 +45,10 @@ git tag -a v0.1.x -m "v0.1.x"
 git push origin v0.1.x
 ```
 
+## Runtime
+
+The settings database is loaded at start-up.  This is achieved using ```<load-on-startup>```
+
 ## Deployment
 
 Adding the update feature created some issues.

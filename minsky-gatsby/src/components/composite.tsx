@@ -1,8 +1,9 @@
 import * as React from "react"
 // https://www.npmjs.com/package/react-input-slider
 import Slider from 'react-input-slider'
-import {TIRCanvas} from "./tircanvas"
-import {Palette} from "./palette"
+import { TIRCanvas } from "./tircanvas"
+import { Palette } from "./palette"
+
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -31,12 +32,12 @@ class Composite extends React.Component<MyProps>{
 
     state = {
         x: 50, y: 50, scale: 50,
-        min: 0, 
+        min: 0,
         max: 50,
         vis: "visible"
     }
 
-    
+
 
     private draw() {
 
@@ -50,6 +51,8 @@ class Composite extends React.Component<MyProps>{
         this.ctx.save();
         this.ctx.clearRect(0, 0, 640, 480);
         //this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
+        this.tirC.setMin(this.state.min)
+        this.tirC.setMax(this.state.max)
         this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);
         this.ctx.restore();
         this.ctx.save();
@@ -73,7 +76,7 @@ class Composite extends React.Component<MyProps>{
         let p = new Palette(512);
         this.tirC = new TIRCanvas(tir_canv, p, "/tir.json");
         this.tirC.draw();
-       
+
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
         this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
@@ -106,26 +109,86 @@ class Composite extends React.Component<MyProps>{
                     </div>
                     <div style={{ visibility: this.state.vis }}>
                         Min <Slider axis="x" x={this.state.min}
-                            onChange={({ x, y }) => { 
+                            onChange={({ x, y }) => {
                                 this.setState({ min: x })
                                 this.tirC.setMin(x)
-                                if (this.state.min > this.state.max){
-                                    this.setState({max: this.state.min})
+                                if (this.state.min > this.state.max) {
+                                    this.setState({ max: this.state.min })
                                 }
-                             }}
+                            }}
                             style={{ left: 30, width: 160 }} />
                     </div>
                     <div style={{ visibility: this.state.vis }}>
                         Max <Slider axis="x" x={this.state.max}
-                            onChange={({ x, y }) => { 
+                            onChange={({ x, y }) => {
                                 this.setState({ max: x })
                                 this.tirC.setMax(x)
-                                if (this.state.max < this.state.min){
-                                    this.setState({min: this.state.max})
+                                if (this.state.max < this.state.min) {
+                                    this.setState({ min: this.state.max })
                                 }
-                             }}
+                            }}
                             style={{ left: 30, width: 160 }} />
                     </div>
+                    <form
+                        onSubmit={event => {
+                            event.preventDefault()
+                            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+                            // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+                            const data = {
+                                "tir.min": this.state.min, "tir.max": this.state.max,
+                                "tir.x": this.state.x, "tir.y": this.state.y, "tir.scale": this.state.scale,
+                            };
+
+                            fetch('/settings', {
+                                method: 'POST', // or 'PUT'
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
+                            })
+                                .then((response) => {
+                                    return response.json()
+                                })
+                                .then((data) => {
+                                    console.log('Success:', data);
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+
+
+                        }}>
+                        <input type="submit" value="save" />
+                    </form>
+                    <form
+                        onSubmit={event => {
+                            event.preventDefault()
+                            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+                            // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+                            fetch('/settings', {
+                                method: 'POST', // or 'PUT'
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                                .then((response) => {
+                                    return response.json()
+                                })
+                                .then((data) => {
+                                    console.log('Loaded:', data)
+                                    this.setState({"min":Number(data["tir.min"])})
+                                    this.setState({"max":Number(data["tir.max"])})
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+
+
+                        }}>
+                        <input type="submit" value="load" />
+                    </form>
                 </div>
             </>
         )

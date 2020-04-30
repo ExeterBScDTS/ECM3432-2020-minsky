@@ -12,7 +12,7 @@ public class initDb {
      *
      * @param fileName the database file name
      */
-    public static void createNewDatabase(String fileName) {
+    public static void createNewDatabase(String fileName) throws SQLException{
  
         String url = "jdbc:sqlite:/tmp/" + fileName;
  
@@ -20,11 +20,8 @@ public class initDb {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
+                System.out.println("Database opened or created.");
             }
- 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
     }
  
@@ -65,7 +62,7 @@ public class initDb {
             stmt.execute(sql_tables);
             stmt.execute(sql_test_data);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -73,7 +70,11 @@ public class initDb {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //createNewDatabase("test.db");
+        try{
+        createNewDatabase("test.db");
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
         createNewTable();
     }
 }

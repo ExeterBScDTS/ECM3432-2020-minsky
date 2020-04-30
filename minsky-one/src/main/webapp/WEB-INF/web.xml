@@ -87,6 +87,25 @@
   </servlet-mapping>   
 
   <servlet>
+     <servlet-name>dbstatus</servlet-name>
+     <servlet-class>minskyone.servlet.DBStatus</servlet-class>
+     <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>dbstatus</servlet-name>
+     <url-pattern>/dbstatus/*</url-pattern>
+  </servlet-mapping> 
+
+  <servlet>
+     <servlet-name>settings</servlet-name>
+     <servlet-class>minskyone.servlet.Settings</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>settings</servlet-name>
+     <url-pattern>/settings/*</url-pattern>
+  </servlet-mapping> 
+
+  <servlet>
      <servlet-name>camera</servlet-name>
      <servlet-class>minskyone.servlet.Camera</servlet-class>
   </servlet>

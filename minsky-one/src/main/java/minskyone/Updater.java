@@ -80,11 +80,14 @@ public class Updater {
         return location;
     }
 
-    public static String getInstalledVer() throws Exception{
-        String releaseMsg = "Hi there";
+    // This method called from JSP servlet, so take care not to throw any exception.
+    public static String getInstalledVer(){
+        String releaseMsg = "unknown";
         try (Stream<String> stream = Files.lines(Paths.get("webapps/" + "minskyOne-release.txt"))) {
   
             releaseMsg = stream.findFirst().get();
+        }catch(Exception e){
+            e.printStackTrace();
         }
         return releaseMsg;
     }
