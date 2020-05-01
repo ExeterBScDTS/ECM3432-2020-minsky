@@ -84,6 +84,29 @@ class Composite extends React.Component<MyProps>{
         if (this.props.controls == "off") {
             this.setState({ vis: "hidden" });
         }
+
+        // Load settings from system database
+        fetch('/settings', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                console.log('Loaded:', data)
+                this.setState({ "min": Number(data["tir.min"]) })
+                this.setState({ "max": Number(data["tir.max"]) })
+                this.setState({ "x": Number(data["tir.x"]) })
+                this.setState({ "y": Number(data["tir.y"]) })
+                this.setState({ "scale": Number(data["tir.scale"]) })
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            });
+
         this.autoRefresh();
     }
 
@@ -129,66 +152,69 @@ class Composite extends React.Component<MyProps>{
                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
-                    <form
-                        onSubmit={event => {
-                            event.preventDefault()
-                            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
-                            // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+                    <div style={{ visibility: this.state.vis }}>
+                        <form
+                            onSubmit={event => {
+                                event.preventDefault()
+                                //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+                                // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-                            const data = {
-                                "tir.min": this.state.min, "tir.max": this.state.max,
-                                "tir.x": this.state.x, "tir.y": this.state.y, "tir.scale": this.state.scale,
-                            };
+                                const data = {
+                                    "tir.min": this.state.min, "tir.max": this.state.max,
+                                    "tir.x": this.state.x, "tir.y": this.state.y, "tir.scale": this.state.scale,
+                                };
 
-                            fetch('/settings', {
-                                method: 'POST', // or 'PUT'
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify(data),
-                            })
-                                .then((response) => {
-                                    return response.json()
+                                fetch('/settings', {
+                                    method: 'POST', // or 'PUT'
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(data),
                                 })
-                                .then((data) => {
-                                    console.log('Success:', data);
+                                    .then((response) => {
+                                        return response.json()
+                                    })
+                                    .then((data) => {
+                                        console.log('Success:', data);
+                                    })
+                                    .catch((error) => {
+                                        console.error('Error:', error);
+                                    });
+
+
+                            }}>
+                            <input type="submit" value="save" />
+                        </form>
+                        <form
+                            onSubmit={event => {
+                                event.preventDefault()
+                                //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
+                                // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+                                fetch('/settings', {
+                                    method: 'POST', // or 'PUT'
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
                                 })
-                                .catch((error) => {
-                                    console.error('Error:', error);
-                                });
-
-
-                        }}>
-                        <input type="submit" value="save" />
-                    </form>
-                    <form
-                        onSubmit={event => {
-                            event.preventDefault()
-                            //fetch("/update?download="+latestVer).then(response => response.text()).then(text => {alert(text)})
-                            // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
-                            fetch('/settings', {
-                                method: 'POST', // or 'PUT'
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                                .then((response) => {
-                                    return response.json()
-                                })
-                                .then((data) => {
-                                    console.log('Loaded:', data)
-                                    this.setState({"min":Number(data["tir.min"])})
-                                    this.setState({"max":Number(data["tir.max"])})
-                                })
-                                .catch((error) => {
-                                    console.error('Error:', error);
-                                });
-
-
-                        }}>
-                        <input type="submit" value="load" />
-                    </form>
+                                    .then((response) => {
+                                        return response.json()
+                                    })
+                                    .then((data) => {
+                                        console.log('Loaded:', data)
+                                        this.setState({ "min": Number(data["tir.min"]) })
+                                        this.setState({ "max": Number(data["tir.max"]) })
+                                        this.setState({ "x": Number(data["tir.x"]) })
+                                        this.setState({ "y": Number(data["tir.y"]) })
+                                        this.setState({ "scale": Number(data["tir.scale"]) })
+                                    })
+                                    .catch((error) => {
+                                        console.error('Error:', error)
+                                    });
+                            }}>
+                            <input type="submit" value="load" />
+                        </form>
+                    </div>
                 </div>
             </>
         )
