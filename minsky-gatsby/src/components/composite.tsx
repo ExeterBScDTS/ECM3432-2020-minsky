@@ -37,6 +37,13 @@ class Composite extends React.Component<MyProps>{
         vis: "visible"
     }
 
+    _onMouseMove(e: MouseEvent) {
+        this.setState({ x: e.screenX, y: e.screenY })
+        var rect = e.target.getBoundingClientRect()
+        let x = e.clientX - ~~rect.left
+        let y = e.clientY - ~~rect.top
+        console.log(x,y)
+    }
 
 
     private draw() {
@@ -118,7 +125,7 @@ class Composite extends React.Component<MyProps>{
                         <Slider axis="y" y={this.state.y} onChange={
                             ({ x, y }) => { this.setState({ y: y }) }
                         } style={{ height: 640, visibility: this.state.vis }} />
-                        <canvas className="image_cw" ref="canvas" width={640} height={480} />
+                        <canvas onMouseMove={this._onMouseMove.bind(this)} className="image_cw" ref="canvas" width={640} height={480} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.x} onChange={
