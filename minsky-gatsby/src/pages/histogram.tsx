@@ -6,7 +6,7 @@ import HistSVG from "../components/histsvg"
 
 const HistogramPage = () => (
   <Layout>
-    <HistSVG/>
+    <HistSVG id="hist" pal={50}/>
   </Layout>
 )
 

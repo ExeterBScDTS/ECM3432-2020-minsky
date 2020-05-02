@@ -38,7 +38,7 @@ class Composite extends React.Component<MyProps>{
     }
 
     _onMouseMove(e: MouseEvent) {
-        var rect = e.target.getBoundingClientRect()
+        var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
         console.log(x,y)
