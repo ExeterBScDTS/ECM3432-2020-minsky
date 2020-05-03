@@ -10,22 +10,26 @@ import {Timeline} from "./timeline"
 export interface MyProps {
     id: string,
     pal: number,
+    latest: number
   }
 
 class TemperaturePlot extends React.Component<MyProps> {
+
+    h:Timeline
 
     componentDidMount() {
         const svg:SVGSVGElement = this.refs.svg as SVGSVGElement;
 
         let p = new Palette(this.props.pal);
-        let h = new Timeline(svg);
-        h.redraw();
+        this.h = new Timeline(svg);
+        this.h.redraw();
     }
 
 
     render() { 
+        if(this.h) this.h.update(this.props.latest)
         return(
-        <canvas ref="canvas" width={320} height={240} id={this.props.id}/>
+            <svg ref="svg" width={960} height={500}/>
         )
     }
 }
