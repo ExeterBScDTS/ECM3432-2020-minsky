@@ -18,6 +18,9 @@ const TimelinePage = () => {
           console.log(x, y)
         }
       } style={{ width: 640 }} />
+      {
+      // Modifying a property will cause the component to be re-rendered 
+      }
       <TemperaturePlot id="plot" pal={50} latest={sliderX}/>
     </Layout>
   )

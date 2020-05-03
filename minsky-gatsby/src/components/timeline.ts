@@ -6,7 +6,8 @@ async function sleep(ms:number):Promise<number> {
 
 class Timeline{
 
-    palette:Array<string>;
+    palette:Array<string>
+    linePath:SVGPathElement
 
     constructor(svg:SVGSVGElement) {
       let p1 = this.line();
@@ -15,8 +16,9 @@ class Timeline{
 
     line():SVGGElement{
       var NS="http://www.w3.org/2000/svg";
-      var SVGGroup = <SVGGElement><any>document.createElementNS(NS,"g"); 
-      var SVGObj= <SVGPathElement><any>document.createElementNS(NS,"path");
+      var SVGGroup = <SVGGElement><any>document.createElementNS(NS,"g") 
+      var SVGObj= <SVGPathElement><any>document.createElementNS(NS,"path")
+      this.linePath = SVGObj
       SVGObj.style.fill="none"
       SVGObj.style.stroke="steelblue"
       SVGObj.style.strokeWidth="1.5"
@@ -29,6 +31,7 @@ class Timeline{
 
     update(newval:number){
       console.log("updating with", newval)
+      this.linePath.setAttribute("d", "M 0 200 L 5 5 L 15 15 L 300 " + newval)
     }
  
    async redraw():Promise<void>{
