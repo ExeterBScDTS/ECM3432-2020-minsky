@@ -22,7 +22,6 @@ class TemperaturePlot extends React.Component<MyProps> {
 
         let p = new Palette(this.props.pal);
         this.h = new Timeline(svg);
-        this.h.redraw();
     }
 
 

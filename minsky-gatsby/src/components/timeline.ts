@@ -8,10 +8,12 @@ class Timeline{
 
     palette:Array<string>
     linePath:SVGPathElement
+    lineData:Array<number>
 
     constructor(svg:SVGSVGElement) {
-      let p1 = this.line();
-      svg.appendChild(p1);
+      let p1 = this.line()
+      svg.appendChild(p1)
+      this.lineData = new Array()
     }
 
     line():SVGGElement{
@@ -31,18 +33,16 @@ class Timeline{
 
     update(newval:number){
       console.log("updating with", newval)
-      this.linePath.setAttribute("d", "M 0 200 L 5 5 L 15 15 L 300 " + newval)
+      let len = this.lineData.push(newval)
+      if(len > 50){
+        this.lineData.shift()
+      }
+      let path = "M 0 200 "
+      for(let i=0; i < this.lineData.length;i++){
+        path += "L " + i * 10 + " " + this.lineData[i]
+      }
+      this.linePath.setAttribute("d", path)
     }
- 
-   async redraw():Promise<void>{
-     await sleep(200).then(()=>{});
-     //let response = await fetch("/data-url");
-     //let tir = await response.json();
-   
-     // use requestAnimationFrame() so we don't update when the browser page
-     // is not visible.
-     window.requestAnimationFrame(() => this.redraw());
-   }
  
    setPalette(palette:Palette){
       this.palette=palette.data;
@@ -54,7 +54,6 @@ class Timeline{
     let h = new Timeline(svg);
     let p = new Palette(50);
     h.setPalette(p);
-    h.redraw();
   }
  
  }
