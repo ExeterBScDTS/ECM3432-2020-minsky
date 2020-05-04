@@ -9,8 +9,10 @@ class Timeline{
     palette:Array<string>
     linePath:SVGPathElement
     lineData:Array<number>
+    width:number
 
     constructor(svg:SVGSVGElement) {
+      this.width = svg.width.baseVal.value
       let p1 = this.line()
       svg.appendChild(p1)
       this.lineData = new Array()
@@ -26,7 +28,6 @@ class Timeline{
       SVGObj.style.strokeWidth="1.5"
       SVGObj.style.strokeLinejoin="round"
       SVGObj.style.strokeLinecap="round"
-      SVGObj.setAttribute("d", "M 0 200 L 5 5 L 15 15 L 300 20")
       SVGGroup.appendChild(SVGObj)
       return SVGGroup;
     }
@@ -37,9 +38,9 @@ class Timeline{
       if(len > 50){
         this.lineData.shift()
       }
-      let path = "M 0 200 "
+      let path = "M 0 0 "
       for(let i=0; i < this.lineData.length;i++){
-        path += "L " + i * 10 + " " + this.lineData[i]
+        path += "L " + i * (this.width / 50) + " " + this.lineData[i]
       }
       this.linePath.setAttribute("d", path)
     }

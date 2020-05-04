@@ -9,6 +9,7 @@ import {Timeline} from "./timeline"
 
 export interface MyProps {
     id: string,
+    width: number,
     pal: number,
     latest: number
   }
@@ -28,7 +29,7 @@ class TemperaturePlot extends React.Component<MyProps> {
     render() { 
         if(this.h) this.h.update(this.props.latest)
         return(
-            <svg ref="svg" width={960} height={500}/>
+            <svg ref="svg" width={this.props.width} height={150}/>
         )
     }
 }
