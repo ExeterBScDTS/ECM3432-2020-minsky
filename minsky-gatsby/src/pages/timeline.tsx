@@ -21,7 +21,9 @@ const TimelinePage = () => {
       {
       // Modifying a property will cause the component to be re-rendered 
       }
-      <TemperaturePlot id="plot" width={600} pal={50} latest={sliderX}/>
+      <div>
+      <TemperaturePlot id="plot" width={200} height={100} pal={50} latest={sliderX}/>
+      </div>
     </Layout>
   )
 }

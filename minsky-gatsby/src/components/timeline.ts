@@ -10,9 +10,11 @@ class Timeline{
     linePath:SVGPathElement
     lineData:Array<number>
     width:number
+    height:number
 
     constructor(svg:SVGSVGElement) {
       this.width = svg.width.baseVal.value
+      this.height = svg.height.baseVal.value
       let p1 = this.line()
       svg.appendChild(p1)
       this.lineData = new Array()
@@ -32,6 +34,7 @@ class Timeline{
       return SVGGroup;
     }
 
+    // newval is between 0 and 100
     update(newval:number){
       console.log("updating with", newval)
       let len = this.lineData.push(newval)
@@ -40,7 +43,7 @@ class Timeline{
       }
       let path = "M 0 0 "
       for(let i=0; i < this.lineData.length;i++){
-        path += "L " + i * (this.width / 50) + " " + this.lineData[i]
+        path += "L " + i * (this.width / 50) + " " + this.lineData[i] * 0.01 * this.height
       }
       this.linePath.setAttribute("d", path)
     }
