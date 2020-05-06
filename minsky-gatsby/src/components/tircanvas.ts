@@ -54,11 +54,9 @@ class TIRCanvas {
     const response = await fetch(this.uri);
     const tir = await response.json();
 
-    console.log("CENTRE TIR", tir[32*12+16])
     try{
     this.callback(tir[32*12+16])
     }catch{
-      console.log("No CB")
     }
 
     for(let row=0; row<32; row++){
