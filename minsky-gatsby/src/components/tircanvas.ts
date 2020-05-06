@@ -8,15 +8,17 @@ class TIRCanvas {
   private readonly ctx: CanvasRenderingContext2D
   private readonly pal: Palette
   private readonly uri: string
+  private readonly callback: (v:number) => void
   private readonly canvas: HTMLCanvasElement
   private mint = 0.0
   private maxt = 50.0
 
-  constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string) {
+  constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string, callback: (v:number) => void) {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.pal = palette
     this.uri = uri
+    this.callback = callback
   }
 
   getCanv(){
@@ -51,6 +53,13 @@ class TIRCanvas {
     await sleep(200).then(()=>{});
     const response = await fetch(this.uri);
     const tir = await response.json();
+
+    console.log("CENTRE TIR", tir[32*12+16])
+    try{
+    this.callback(tir[32*12+16])
+    }catch{
+      console.log("No CB")
+    }
 
     for(let row=0; row<32; row++){
       let y=row*10;

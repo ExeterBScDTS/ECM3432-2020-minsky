@@ -73,6 +73,10 @@ class Composite extends React.Component<MyProps>{
         window.requestAnimationFrame(() => this.autoRefresh());
     }
 
+    tir_cb(v:number){
+        console.log("CENTRE V", v)
+    }
+
     componentDidMount() {
 
         const tir_canv = document.createElement('canvas')
@@ -80,7 +84,7 @@ class Composite extends React.Component<MyProps>{
         tir_canv.height = 240
         tir_canv.width = 320
         let p = new Palette(512);
-        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json");
+        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.tir_cb);
         this.tirC.draw();
 
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
