@@ -10,12 +10,22 @@ import { useState } from "react"
 import Slider from 'react-input-slider'
 
 const CamerasPage = () => {
-  const [sliderX, setSliderX] = useState(0)
+  
+  let lineData:number[] 
+  lineData = new Array()
+  const buffer_size = 20
+  const [sliderX, setSliderX] = useState(lineData)
+
   function fn(v:number){
-    setSliderX(49) 
-    setSliderX(50)
-    console.log(v)
+    let len = lineData.push(v)
+    if(len > buffer_size){
+      lineData.shift()
+    }
+    // Use spread operator to copy the array. Otherwise react won't know the value
+    // has changed.
+    setSliderX([...lineData])
   }
+
   return (
     <Layout>
       <div className="row">

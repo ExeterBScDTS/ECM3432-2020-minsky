@@ -35,9 +35,9 @@ class Timeline{
     }
 
     // newval is between 0 and 100
-    update(newval:number){
+    update(newval:number[]){
       console.log("updating with", newval)
-      let len = this.lineData.push(newval)
+      let len = this.lineData.push(newval[0])
       if(len > 50){
         this.lineData.shift()
       }

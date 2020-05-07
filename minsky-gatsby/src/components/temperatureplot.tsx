@@ -12,7 +12,7 @@ export interface MyProps {
     width: number,
     height: number,
     pal: number,
-    latest: number
+    latest: number[]
   }
 
 class TemperaturePlot extends React.Component<MyProps> {
