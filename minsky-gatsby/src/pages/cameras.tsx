@@ -16,7 +16,8 @@ const CamerasPage = () => {
   const buffer_size = 20
   const [sliderX, setSliderX] = useState(lineData)
 
-  function fn(v:number){
+  function fn(v:number, min:number, max:number){
+    console.log("ARGS",v, min, max)
     let len = lineData.push(v)
     if(len > buffer_size){
       lineData.shift()

@@ -8,12 +8,12 @@ class TIRCanvas {
   private readonly ctx: CanvasRenderingContext2D
   private readonly pal: Palette
   private readonly uri: string
-  private readonly callback: (v:number) => void
+  private readonly callback: (v:number,min:number,max:number) => void
   private readonly canvas: HTMLCanvasElement
   private mint = 0.0
   private maxt = 50.0
 
-  constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string, callback: (v:number) => void) {
+  constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string, callback: (v:number,min:number,max:number) => void) {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.pal = palette
@@ -55,7 +55,7 @@ class TIRCanvas {
     const tir = await response.json();
 
     //try{
-    this.callback(tir[32*12+16])
+    this.callback(tir[32*12+16],this.mint,this.maxt)
     //}catch{
     //  console.log("No callback")
     //}

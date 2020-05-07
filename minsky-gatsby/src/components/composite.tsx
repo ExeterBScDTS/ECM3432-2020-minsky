@@ -13,7 +13,7 @@ export interface MyProps {
     id: string
     rgb: string
     //tir: string;
-    callback: (v:number) => void
+    callback: (v:number,min:number,max:number) => void
     controls: string
 }
 
