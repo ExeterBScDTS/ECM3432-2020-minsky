@@ -57,6 +57,7 @@ class TIRCanvas {
     try{
     this.callback(tir[32*12+16])
     }catch{
+      console.log("No callback")
     }
 
     for(let row=0; row<32; row++){

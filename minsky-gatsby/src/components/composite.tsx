@@ -10,10 +10,11 @@ async function sleep(ms: number): Promise<number> {
 }
 
 export interface MyProps {
-    id: string;
-    rgb: string;
-    tir: string;
-    controls: string;
+    id: string
+    rgb: string
+    //tir: string;
+    callback: (v:number) => void
+    controls: string
 }
 
 class Composite extends React.Component<MyProps>{
@@ -84,7 +85,7 @@ class Composite extends React.Component<MyProps>{
         tir_canv.height = 240
         tir_canv.width = 320
         let p = new Palette(512);
-        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.tir_cb);
+        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback);
         this.tirC.draw();
 
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;

@@ -10,19 +10,23 @@ import {TIRCanvas} from "./tircanvas"
 export interface MyProps {
     id: string,
     pal: number,
+    callback: (v:number) => void
   }
 
 class TirCanv extends React.Component<MyProps> {
 
+
+    /*
     blx(v:number){
         console.log("blx")
     }
+    */
 
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
 
         let p = new Palette(this.props.pal);
-        let t:TIRCanvas = new TIRCanvas(canvas, p, "/tir.json", this.blx);
+        let t:TIRCanvas = new TIRCanvas(canvas, p, "/tir.json", this.props.callback);
         t.draw();
     }
 

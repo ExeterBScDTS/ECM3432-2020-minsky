@@ -11,25 +11,23 @@ import Slider from 'react-input-slider'
 
 const CamerasPage = () => {
   const [sliderX, setSliderX] = useState(0)
+  function fn(v:number){
+    setSliderX(49) 
+    setSliderX(50)
+    console.log(v)
+  }
   return (
     <Layout>
       <div className="row">
         <Link className="btn btn-outline-secondary" to="/updates">Check for updates</Link>
       </div>
       <div className="row">
-        <Composite id="comp" tir="tir" rgb="rgb" controls="on" />
+        <Composite id="comp" rgb="rgb" controls="on" callback={fn} />
         <TemperaturePlot id="plot" width={300} height={200} pal={50} latest={sliderX} />
       </div>
-      <div style={{ visibility: "hidden" }}>
+      <div style={{ visibility: "visible" }}>
         <RgbCanv id="rgb" />
-        <TirCanv id="tir" pal={512} />
       </div>
-      <Slider axis="x" x={sliderX} onChange={
-        ({ x, y }) => {
-          setSliderX(x)
-          console.log(x, y)
-        }
-      } style={{ width: 640 }} />
     </Layout>
   )
 }
