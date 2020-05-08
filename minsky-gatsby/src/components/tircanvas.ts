@@ -54,11 +54,11 @@ class TIRCanvas {
     const response = await fetch(this.uri);
     const tir = await response.json();
 
-    //try{
+    try{
     this.callback(tir[32*12+16],this.mint,this.maxt)
-    //}catch{
-    //  console.log("No callback")
-    //}
+    }catch(e){
+      console.log("No callback", e)
+    }
 
     for(let row=0; row<32; row++){
       let y=row*10;

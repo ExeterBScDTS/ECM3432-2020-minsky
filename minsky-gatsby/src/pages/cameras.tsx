@@ -10,21 +10,27 @@ import { useState } from "react"
 import Slider from 'react-input-slider'
 
 const CamerasPage = () => {
-  
-  let lineData:number[] 
-  lineData = new Array()
-  const buffer_size = 20
-  const [sliderX, setSliderX] = useState(lineData)
 
-  function fn(v:number, min:number, max:number){
-    console.log("ARGS",v, min, max)
-    let len = lineData.push(v)
-    if(len > buffer_size){
-      lineData.shift()
+  let lineData: number[], rawData: number[]
+  const buffer_size = 20
+  rawData = new Array()
+  lineData = new Array(buffer_size)
+
+  const [plotData, setPlotData] = useState(lineData)
+
+  function fn(v: number, min: number, max: number) {
+    console.log("ARGS", v, min, max)
+    let len = rawData.push(v)
+    if (len > buffer_size) {
+      rawData.shift()
     }
-    // Use spread operator to copy the array. Otherwise react won't know the value
+    // Use spread operator to copy the array. Otherwise React won't know the value
     // has changed.
-    setSliderX([...lineData])
+    for (let i in rawData) {
+      lineData[i] = ~~((rawData[i] - min) * (100 / (max - min)))
+      if (lineData[i] > 100) lineData[i] = 100
+    }
+    setPlotData([...lineData])
   }
 
   return (
@@ -34,7 +40,7 @@ const CamerasPage = () => {
       </div>
       <div className="row">
         <Composite id="comp" rgb="rgb" controls="on" callback={fn} />
-        <TemperaturePlot id="plot" width={300} height={200} pal={50} latest={sliderX} />
+        <TemperaturePlot id="plot" width={300} height={200} pal={50} latest={plotData} />
       </div>
       <div style={{ visibility: "visible" }}>
         <RgbCanv id="rgb" />
