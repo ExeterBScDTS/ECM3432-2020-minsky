@@ -36,9 +36,9 @@ class Timeline {
 
   // newval elements are between 0 and 100
   update(newval: number[]) {
-    let path = "M 0 0 "
-    for (let i = 0; i < newval.length; i++) {
-      path += "L " + i * (this.width / newval.length) + " " + newval[i] * 0.01 * this.height
+    let path = "M 0 " + (100 - newval[0])* 0.01 * this.height + " "
+    for (let i = 1; i < newval.length; i++) {
+      path += "L " + i * (this.width / newval.length) + " " + (100 - newval[i]) * 0.01 * this.height
     }
     this.linePath.setAttribute("d", path)
   }

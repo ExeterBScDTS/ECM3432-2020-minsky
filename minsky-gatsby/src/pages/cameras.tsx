@@ -27,7 +27,7 @@ const CamerasPage = () => {
     // Use spread operator to copy the array. Otherwise React won't know the value
     // has changed.
     for (let i in rawData) {
-      lineData[i] = ~~((rawData[i] - min) * (100 / (max - min)))
+      lineData[i] = ((rawData[i] - min) * (100 / (max - min)))
       if (lineData[i] > 100) lineData[i] = 100
     }
     setPlotData([...lineData])
@@ -40,7 +40,7 @@ const CamerasPage = () => {
       </div>
       <div className="row">
         <Composite id="comp" rgb="rgb" controls="on" callback={fn} />
-        <TemperaturePlot id="plot" width={300} height={200} pal={50} latest={plotData} />
+        <TemperaturePlot id="plot" width={300} height={400} pal={50} latest={plotData} />
       </div>
       <div style={{ visibility: "visible" }}>
         <RgbCanv id="rgb" />
