@@ -3,19 +3,44 @@ import Layout from "../components/layout"
 import TirCanv from "../components/tircanv"
 import RgbCanv from "../components/rgbcanv"
 import Composite from "../components/composite"
+import TemperaturePlot from "../components/temperatureplot"
+import { useState } from "react"
 
-const IndexPage = () => (
+const IndexPage = () => {
+  let lineData: number[], rawData: number[]
+  const buffer_size = 20
+  rawData = new Array()
+  lineData = new Array(buffer_size)
 
-<Layout>
-  
-            <div className="row" style={{visibility:"hidden",height:"0px"}} >
-              <RgbCanv id="rgb" />
-              <TirCanv id="tir" pal={512} />
-            </div>
-              <div>
-                <Composite id="comp" tir="tir" rgb="rgb" controls="off"/>
-              </div>
-</Layout>
-)
+  const [plotData, setPlotData] = useState(lineData)
+
+  function fn(v: number, min: number, max: number) {
+    let len = rawData.push(v)
+    if (len > buffer_size) {
+      rawData.shift()
+    }
+    // Use spread operator to copy the array. Otherwise React won't know the value
+    // has changed.
+    for (let i in rawData) {
+      lineData[i] = ~~((rawData[i] - min) * (100 / (max - min)))
+      if (lineData[i] > 100) lineData[i] = 100
+    }
+    setPlotData([...lineData])
+  }
+
+  return (
+
+    <Layout>
+
+      <div className="row" style={{ visibility: "hidden", height: "0px" }} >
+        <RgbCanv id="rgb" />
+      </div>
+      <div className="row">
+        <Composite id="comp" rgb="rgb" callback={fn} controls="off" />
+        <TemperaturePlot id="plot" width={300} height={400} pal={50} latest={plotData} />
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
