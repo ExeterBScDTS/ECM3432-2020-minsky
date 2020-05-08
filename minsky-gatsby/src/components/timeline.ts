@@ -15,8 +15,8 @@ class Timeline {
   constructor(svg: SVGSVGElement) {
     this.width = svg.width.baseVal.value
     this.height = svg.height.baseVal.value
-    let p1 = this.line()
-    svg.appendChild(p1)
+    svg.appendChild(this.line())
+    svg.appendChild(this.scale())
     this.lineData = new Array()
   }
 
@@ -31,6 +31,28 @@ class Timeline {
     SVGObj.style.strokeLinejoin = "round"
     SVGObj.style.strokeLinecap = "round"
     SVGGroup.appendChild(SVGObj)
+    return SVGGroup;
+  }
+
+  scale(): SVGGElement {
+    let NS = "http://www.w3.org/2000/svg";
+    let SVGGroup = <SVGGElement><any>document.createElementNS(NS, "g")
+    let SVGObj = <SVGPathElement><any>document.createElementNS(NS, "path")
+    SVGObj.style.fill = "none"
+    SVGObj.style.stroke = "black"
+    SVGObj.style.strokeWidth = "1.5"
+    SVGObj.style.strokeLinejoin = "round"
+    SVGObj.style.strokeLinecap = "round"
+    SVGObj.setAttribute("d", "M " + this.width + " 0 L " + this.width + " " + this.height)
+    SVGGroup.appendChild(SVGObj)
+
+    let SVGText= <SVGTextElement><any>document.createElementNS(NS,"text")
+    SVGText.style.fill= "black"
+    SVGText.textContent= "20C"
+    SVGText.setAttribute("x","" + (this.width-30))
+    SVGText.setAttribute("y","100")
+    SVGGroup.appendChild(SVGText)
+
     return SVGGroup;
   }
 
