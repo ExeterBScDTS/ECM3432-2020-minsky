@@ -18,6 +18,7 @@ const CamerasPage = () => {
 
   const [plotData, setPlotData] = useState(lineData)
   const [plotMin, setPlotMin] = useState(0)
+  const [plotMax, setPlotMax] = useState(100)
 
   function fn(v: number, min: number, max: number) {
     console.log("ARGS", v, min, max)
@@ -33,6 +34,7 @@ const CamerasPage = () => {
     }
     setPlotData([...lineData])
     setPlotMin(min)
+    setPlotMax(max)
   }
 
   return (
@@ -42,7 +44,7 @@ const CamerasPage = () => {
       </div>
       <div className="row">
         <Composite id="comp" rgb="rgb" controls="on" callback={fn} />
-        <TemperaturePlot id="plot" width={300} height={400} pal={50} latest={plotData} min={plotMin}/>
+        <TemperaturePlot id="plot" width={300} height={400} pal={50} latest={plotData} min={plotMin} max={plotMax}/>
       </div>
       <div style={{ visibility: "visible" }}>
         <RgbCanv id="rgb" />

@@ -9,15 +9,20 @@ class Timeline {
   palette: Array<string>
   linePath: SVGPathElement
   lineData: Array<number>
+  scaleObj : SVGGElement
   width: number
   height: number
+  svg: SVGSVGElement
 
   constructor(svg: SVGSVGElement, pal: Palette) {
     this.width = svg.width.baseVal.value
     this.height = svg.height.baseVal.value
     svg.appendChild(this.line())
-    svg.appendChild(this.scale())
+    this.scaleObj = this.scale(0,100)
+    svg.appendChild(this.scaleObj)
     this.lineData = new Array()
+    //svg.removeChild(this.scaleObj)
+    this.svg = svg
   }
 
   line(): SVGGElement {
@@ -31,10 +36,10 @@ class Timeline {
     SVGObj.style.strokeLinejoin = "round"
     SVGObj.style.strokeLinecap = "round"
     SVGGroup.appendChild(SVGObj)
-    return SVGGroup;
+    return SVGGroup
   }
 
-  scale(): SVGGElement {
+  scale(min:number,max:number): SVGGElement {
     let NS = "http://www.w3.org/2000/svg";
     let SVGGroup = <SVGGElement><any>document.createElementNS(NS, "g")
     let SVGObj = <SVGPathElement><any>document.createElementNS(NS, "path")
@@ -47,12 +52,34 @@ class Timeline {
     SVGObj.setAttribute("d", "M " + x_coord + " 0 L " + x_coord + " " + this.height)
     SVGGroup.appendChild(SVGObj)
 
-    let SVGText= <SVGTextElement><any>document.createElementNS(NS,"text")
-    SVGText.style.fill= "black"
-    SVGText.textContent= "20"
-    SVGText.setAttribute("x","" + (x_coord + 2))
-    SVGText.setAttribute("y","100")
-    SVGGroup.appendChild(SVGText)
+    let SVGTextMin= <SVGTextElement><any>document.createElementNS(NS,"text")
+    SVGTextMin.style.fill= "black"
+    if(min != undefined){
+    SVGTextMin.textContent= min.toString()
+    }
+    SVGTextMin.setAttribute("x","" + (x_coord + 2))
+    SVGTextMin.setAttribute("y", this.height.toString())
+    SVGGroup.appendChild(SVGTextMin)
+
+    let SVGTextMax= <SVGTextElement><any>document.createElementNS(NS,"text")
+    SVGTextMax.style.fill= "black"
+    if(max != undefined){
+    SVGTextMax.textContent= max.toString()
+    }
+    SVGTextMax.setAttribute("x","" + (x_coord + 2))
+    SVGTextMax.setAttribute("y", "0")
+    SVGTextMax.setAttribute("dy", "1em")
+    SVGGroup.appendChild(SVGTextMax)
+
+    let SVGTextMid= <SVGTextElement><any>document.createElementNS(NS,"text")
+    SVGTextMid.style.fill= "black"
+    if(max != undefined && min != undefined){
+    SVGTextMid.textContent= (~~((max + min)/2)).toString()
+    }
+    SVGTextMid.setAttribute("x","" + (x_coord + 2))
+    SVGTextMid.setAttribute("y", "0")
+    SVGTextMid.setAttribute("dy", "50%")
+    SVGGroup.appendChild(SVGTextMid)
 
     return SVGGroup;
   }
@@ -64,6 +91,13 @@ class Timeline {
       path += "L " + i * (this.width / newval.length) + " " + (100 - newval[i]) * 0.01 * this.height
     }
     this.linePath.setAttribute("d", path)
+    try{
+    this.svg.removeChild(this.scaleObj)
+    }catch{
+
+    }
+    this.scaleObj = this.scale(min,max)
+    this.svg.appendChild(this.scaleObj)
   }
 
   setPalette(palette: Palette) {
@@ -73,8 +107,8 @@ class Timeline {
   static main(selector: string) {
     let svg = <SVGSVGElement><any>document.querySelector(selector);
 
-    let h = new Timeline(svg);
     let p = new Palette(50);
+    let h = new Timeline(svg,p);
     h.setPalette(p);
   }
 
