@@ -12,7 +12,9 @@ export interface MyProps {
     width: number,
     height: number,
     pal: number,
-    latest: number[]
+    latest: number[],
+    min: number,
+    max: number
   }
 
 class TemperaturePlot extends React.Component<MyProps> {
@@ -23,12 +25,12 @@ class TemperaturePlot extends React.Component<MyProps> {
         const svg:SVGSVGElement = this.refs.svg as SVGSVGElement;
 
         let p = new Palette(this.props.pal);
-        this.h = new Timeline(svg);
+        this.h = new Timeline(svg, p);
     }
 
 
     render() { 
-        if(this.h) this.h.update(this.props.latest)
+        if(this.h) this.h.update(this.props.latest,this.props.min,this.props.max)
         return(
             <svg ref="svg" width={this.props.width} height={this.props.height}/>
         )

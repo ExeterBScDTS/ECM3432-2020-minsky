@@ -12,7 +12,7 @@ class Timeline {
   width: number
   height: number
 
-  constructor(svg: SVGSVGElement) {
+  constructor(svg: SVGSVGElement, pal: Palette) {
     this.width = svg.width.baseVal.value
     this.height = svg.height.baseVal.value
     svg.appendChild(this.line())
@@ -38,18 +38,19 @@ class Timeline {
     let NS = "http://www.w3.org/2000/svg";
     let SVGGroup = <SVGGElement><any>document.createElementNS(NS, "g")
     let SVGObj = <SVGPathElement><any>document.createElementNS(NS, "path")
+    let x_coord = this.width - 30
     SVGObj.style.fill = "none"
     SVGObj.style.stroke = "black"
     SVGObj.style.strokeWidth = "1.5"
     SVGObj.style.strokeLinejoin = "round"
     SVGObj.style.strokeLinecap = "round"
-    SVGObj.setAttribute("d", "M " + this.width + " 0 L " + this.width + " " + this.height)
+    SVGObj.setAttribute("d", "M " + x_coord + " 0 L " + x_coord + " " + this.height)
     SVGGroup.appendChild(SVGObj)
 
     let SVGText= <SVGTextElement><any>document.createElementNS(NS,"text")
     SVGText.style.fill= "black"
-    SVGText.textContent= "20C"
-    SVGText.setAttribute("x","" + (this.width-30))
+    SVGText.textContent= "20"
+    SVGText.setAttribute("x","" + (x_coord + 2))
     SVGText.setAttribute("y","100")
     SVGGroup.appendChild(SVGText)
 
@@ -57,7 +58,7 @@ class Timeline {
   }
 
   // newval elements are between 0 and 100
-  update(newval: number[]) {
+  update(newval: number[], min: number, max:number) {
     let path = "M 0 " + (100 - newval[0])* 0.01 * this.height + " "
     for (let i = 1; i < newval.length; i++) {
       path += "L " + i * (this.width / newval.length) + " " + (100 - newval[i]) * 0.01 * this.height
