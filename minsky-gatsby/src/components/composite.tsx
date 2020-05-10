@@ -84,9 +84,9 @@ class Composite extends React.Component<MyProps>{
         tir_canv.id = 'dummy'
         tir_canv.height = 240
         tir_canv.width = 320
-        let p = new Palette(512);
-        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback);
-        this.tirC.draw();
+        let p = new Palette(200)
+        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback)
+        this.tirC.draw()
 
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")

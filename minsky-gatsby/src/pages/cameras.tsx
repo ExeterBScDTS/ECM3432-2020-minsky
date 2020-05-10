@@ -44,7 +44,7 @@ const CamerasPage = () => {
       </div>
       <div className="row">
         <Composite id="comp" rgb="rgb" controls="on" callback={fn} />
-        <TemperaturePlot id="plot" width={300} height={400} pal={50} latest={plotData} min={plotMin} max={plotMax}/>
+        <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax}/>
       </div>
       <div style={{ visibility: "visible" }}>
         <RgbCanv id="rgb" />
