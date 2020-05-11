@@ -38,26 +38,38 @@ class Composite extends React.Component<MyProps>{
         vis: "visible"
     }
 
+    private tir_xy(x:number,y:number) : {x:number,y:number} {
+        //this.state.x, this.state.y,this.state.scale
+        let mov_y = (this.state.y) * this.width / 100
+        let mov_x = (100 - this.state.x) * this.height / 100
+
+        let tir_w = 320 * (285 + this.state.scale) / 200
+        let tir_h = 240 * (285 + this.state.scale) / 200
+        mov_y -= tir_w / 2
+        mov_x -= tir_h / 2
+        console.log(mov_x,mov_y)
+        return {x,y}
+      }
+
     _onMouseMove(e: MouseEvent) {
         var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
-        console.log(x,y)
+        console.log("POSN",x,y, this.tir_xy(x,y))
     }
 
 
     private draw() {
 
-        let mov_y = (this.state.y) * this.width / 100;
-        let mov_x = (100 - this.state.x) * this.height / 100;
+        let mov_y = (this.state.y) * this.width / 100
+        let mov_x = (100 - this.state.x) * this.height / 100
 
-        let tir_w = 320 * (285 + this.state.scale) / 200;
-        let tir_h = 240 * (285 + this.state.scale) / 200;
-        mov_y -= tir_w / 2;
-        mov_x -= tir_h / 2;
-        this.ctx.save();
-        this.ctx.clearRect(0, 0, 640, 480);
-        //this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
+        let tir_w = 320 * (285 + this.state.scale) / 200
+        let tir_h = 240 * (285 + this.state.scale) / 200
+        mov_y -= tir_w / 2
+        mov_x -= tir_h / 2
+        this.ctx.save()
+        this.ctx.clearRect(0, 0, 640, 480)
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
         this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);

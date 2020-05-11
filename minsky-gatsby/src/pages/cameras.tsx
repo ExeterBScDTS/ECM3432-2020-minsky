@@ -21,7 +21,6 @@ const CamerasPage = () => {
   const [plotMax, setPlotMax] = useState(100)
 
   function fn(v: number, min: number, max: number) {
-    console.log("ARGS", v, min, max)
     let len = rawData.push(v)
     if (len > buffer_size) {
       rawData.shift()
