@@ -48,7 +48,7 @@ class Composite extends React.Component<MyProps>{
         mov_y -= tir_w / 2
         mov_x -= tir_h / 2
         console.log(mov_x,mov_y)
-        return {x,y}
+        return {x:x-mov_x,y:y-mov_y}
       }
 
     _onMouseMove(e: MouseEvent) {
