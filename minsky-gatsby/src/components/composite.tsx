@@ -149,7 +149,7 @@ class Composite extends React.Component<MyProps>{
                         } style={{ left: 30, width: 480, visibility: this.state.vis }} />
                     </div>
                     <div>
-                        <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.05} onChange={
+                        <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.02} onChange={
                             ({ x, y }) => { this.setState({ scale: x }) }
                         } style={{ left: 30, width: 160, visibility: this.state.vis }} />
                     </div>
