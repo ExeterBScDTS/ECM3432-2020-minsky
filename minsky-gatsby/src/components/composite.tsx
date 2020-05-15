@@ -39,10 +39,8 @@ class Composite extends React.Component<MyProps>{
     }
 
     private tir_xy(x:number,y:number) : {x:number,y:number} {
-        //this.state.x, this.state.y,this.state.scale
         let mov_y = (this.state.y) * this.width / 100
-        let mov_x = (100 - this.state.x) * this.height / 100
-
+        let mov_x = (this.state.x) * this.height / 100
         let tir_w = 320 * (this.state.scale)
         let tir_h = 240 * (this.state.scale)
         mov_y -= tir_w / 2
