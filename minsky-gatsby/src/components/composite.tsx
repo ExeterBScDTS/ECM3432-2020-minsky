@@ -47,7 +47,6 @@ class Composite extends React.Component<MyProps>{
         let tir_h = 240 * (this.state.scale)
         mov_y -= tir_w / 2
         mov_x -= tir_h / 2
-        console.log(mov_x,mov_y, this.state.scale)
         return {x:(x-mov_x)/tir_h,y:(y-mov_y)/tir_w}
       }
 
@@ -55,7 +54,7 @@ class Composite extends React.Component<MyProps>{
         var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
-        console.log("POSN",x,y, this.tir_xy(x,y))
+        //console.log("_onMouseMove",x,y, this.tir_xy(x,y))
         this.tirC.setCursor(this.tir_xy(x,y))
     }
 
