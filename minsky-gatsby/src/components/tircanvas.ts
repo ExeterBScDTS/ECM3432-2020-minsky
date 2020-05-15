@@ -1,4 +1,5 @@
 import {Palette} from "./palette"
+import { SCHED_NONE } from "cluster";
 
 async function sleep(ms:number):Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -12,6 +13,7 @@ class TIRCanvas {
   private readonly canvas: HTMLCanvasElement
   private mint = 0.0
   private maxt = 50.0
+  private cursor = {x:0,y:0}
 
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string, callback: (v:number,min:number,max:number) => void) {
     this.canvas = canvas
@@ -19,6 +21,12 @@ class TIRCanvas {
     this.pal = palette
     this.uri = uri
     this.callback = callback
+  }
+
+  setCursor(c:{x:number, y:number}):void
+  {
+    this.cursor=c
+    console.log("setCursor",c)
   }
 
   getCanv(){
