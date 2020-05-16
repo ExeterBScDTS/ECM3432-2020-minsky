@@ -32,32 +32,42 @@ class Composite extends React.Component<MyProps>{
     private mov_y: number = 10;
 
     state = {
-        x: 50, y: 50, scale: 50,
+        x: 50, y: 50, scale: 1.7,
         min: 0,
         max: 50,
         vis: "visible"
     }
 
+    private tir_xy(x:number,y:number) : {x:number,y:number} {
+        let mov_y = (this.state.y) * this.width / 100
+        let mov_x = (this.state.x) * this.height / 100
+        let tir_w = 320 * (this.state.scale)
+        let tir_h = 240 * (this.state.scale)
+        mov_y -= tir_w / 2
+        mov_x -= tir_h / 2
+        return {x:(x-mov_x)/tir_h,y:(y-mov_y)/tir_w}
+      }
+
     _onMouseMove(e: MouseEvent) {
         var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
-        console.log(x,y)
+        //console.log("_onMouseMove",x,y, this.tir_xy(x,y))
+        this.tirC.setCursor(this.tir_xy(x,y))
     }
 
 
     private draw() {
 
-        let mov_y = (this.state.y) * this.width / 100;
-        let mov_x = (100 - this.state.x) * this.height / 100;
+        let mov_y = (this.state.y) * this.width / 100
+        let mov_x = (100 - this.state.x) * this.height / 100
 
-        let tir_w = 320 * (285 + this.state.scale) / 200;
-        let tir_h = 240 * (285 + this.state.scale) / 200;
-        mov_y -= tir_w / 2;
-        mov_x -= tir_h / 2;
-        this.ctx.save();
-        this.ctx.clearRect(0, 0, 640, 480);
-        //this.ctx.drawImage(this.tir, mov_y, mov_x, tir_w, tir_h);
+        let tir_w = 320 * (this.state.scale)
+        let tir_h = 240 * (this.state.scale)
+        mov_y -= tir_w / 2
+        mov_x -= tir_h / 2
+        this.ctx.save()
+        this.ctx.clearRect(0, 0, 640, 480)
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
         this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);
@@ -84,9 +94,9 @@ class Composite extends React.Component<MyProps>{
         tir_canv.id = 'dummy'
         tir_canv.height = 240
         tir_canv.width = 320
-        let p = new Palette(512);
-        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback);
-        this.tirC.draw();
+        let p = new Palette(200)
+        this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback)
+        this.tirC.draw()
 
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
@@ -137,7 +147,7 @@ class Composite extends React.Component<MyProps>{
                         } style={{ left: 30, width: 480, visibility: this.state.vis }} />
                     </div>
                     <div>
-                        <Slider axis="x" x={this.state.scale} onChange={
+                        <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.02} onChange={
                             ({ x, y }) => { this.setState({ scale: x }) }
                         } style={{ left: 30, width: 160, visibility: this.state.vis }} />
                     </div>

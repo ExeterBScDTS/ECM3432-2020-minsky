@@ -13,6 +13,8 @@ const IndexPage = () => {
   lineData = new Array(buffer_size)
 
   const [plotData, setPlotData] = useState(lineData)
+  const [plotMin, setPlotMin] = useState(0)
+  const [plotMax, setPlotMax] = useState(100)
 
   function fn(v: number, min: number, max: number) {
     let len = rawData.push(v)
@@ -26,6 +28,8 @@ const IndexPage = () => {
       if (lineData[i] > 100) lineData[i] = 100
     }
     setPlotData([...lineData])
+    setPlotMin(min)
+    setPlotMax(max)
   }
 
   return (
@@ -37,7 +41,7 @@ const IndexPage = () => {
       </div>
       <div className="row">
         <Composite id="comp" rgb="rgb" callback={fn} controls="off" />
-        <TemperaturePlot id="plot" width={300} height={400} pal={50} latest={plotData} />
+        <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax} />
       </div>
     </Layout>
   )
