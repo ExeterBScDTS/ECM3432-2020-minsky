@@ -5,7 +5,7 @@ import Composite from "../components/composite"
 import TemperaturePlot from "../components/temperatureplot"
 import { useState } from "react"
 
-const IndexPage = () => {
+const MobilePage = () => {
   let lineData: number[], rawData: number[]
   const buffer_size = 20
   rawData = new Array()
@@ -46,4 +46,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default MobilePage

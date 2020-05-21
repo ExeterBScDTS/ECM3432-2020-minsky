@@ -20,7 +20,7 @@ class RgbCanv extends React.Component<MyProps>{
         this.img.src = this.uri + "#" + new Date().getTime();
         this.img.onload = () => {
             // image is 640x480
-            // These values could bre read as img.naturalHeight and img.naturalWidth
+            // These values could be read as img.naturalHeight and img.naturalWidth
             // 
             // Scale image
             // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage

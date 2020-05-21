@@ -3,7 +3,7 @@ import * as React from "react"
 import Slider from 'react-input-slider'
 import { TIRCanvas } from "./tircanvas"
 import { Palette } from "./palette"
-import RgbCanv, { RGBCanvas } from "./rgbcanv"
+
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -12,6 +12,7 @@ async function sleep(ms: number): Promise<number> {
 export interface MyProps {
     id: string
     rgb: string
+    //tir: string;
     callback: (v:number,min:number,max:number) => void
     controls: string
 }
@@ -22,7 +23,13 @@ class Composite extends React.Component<MyProps>{
     private height = 480;
     private ctx: CanvasRenderingContext2D;
     private rgb: HTMLImageElement;
+    //private tir: HTMLImageElement;
     private tirC: TIRCanvas;
+    //private tir_width = 320;
+    //private tir_height = 240;
+    //private uri: string;
+    //private mov_x: number = 10;
+    //private mov_y: number = 10;
 
     state = {
         x: 50, y: 50, scale: 1.7,
@@ -194,6 +201,8 @@ class Composite extends React.Component<MyProps>{
                                     .catch((error) => {
                                         console.error('Error:', error);
                                     });
+
+
                             }}>
                             <input type="submit" value="save" />
                         </form>
