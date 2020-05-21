@@ -4,6 +4,7 @@ import Slider from 'react-input-slider'
 import { TIRCanvas } from "./tircanvas"
 import { Palette } from "./palette"
 import { RGBCanvas } from "./rgbcanvas"
+import { CSSProperties } from "react"
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -27,7 +28,7 @@ class Composite extends React.Component<MyProps>{
         x: 50, y: 50, scale: 1.7,
         min: 0,
         max: 50,
-        vis: "visible"
+        vis: "visible" as VisibilityState
     }
 
     private tir_xy(x:number,y:number) : {x:number,y:number} {
@@ -131,6 +132,7 @@ class Composite extends React.Component<MyProps>{
     }
 
     render() {
+
         return (
             <>
                 <div>
@@ -143,14 +145,14 @@ class Composite extends React.Component<MyProps>{
                     <div>
                         <Slider axis="x" x={this.state.x} onChange={
                             ({ x, y }) => { this.setState({ x: x }) }
-                        } style={{ left: 30, width: 480, visibility: this.state.vis }} />
+                        } style={{visibility: this.state.vis, left: 30, width: 480}} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.02} onChange={
                             ({ x, y }) => { this.setState({ scale: x }) }
                         } style={{ left: 30, width: 160, visibility: this.state.vis }} />
                     </div>
-                    <div style={{ visibility: this.state.vis }}>
+                    <div style={{visibility: this.state.vis}}>
                         Min <Slider axis="x" x={this.state.min}
                             onChange={({ x, y }) => {
                                 this.setState({ min: x })
@@ -161,7 +163,7 @@ class Composite extends React.Component<MyProps>{
                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
-                    <div style={{ visibility: this.state.vis }}>
+                    <div style={{visibility: this.state.vis}}>
                         Max <Slider axis="x" x={this.state.max}
                             onChange={({ x, y }) => {
                                 this.setState({ max: x })
@@ -172,7 +174,7 @@ class Composite extends React.Component<MyProps>{
                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
-                    <div style={{ visibility: this.state.vis }}>
+                    <div style={{visibility: this.state.vis}}>
                         <form
                             onSubmit={event => {
                                 event.preventDefault()
