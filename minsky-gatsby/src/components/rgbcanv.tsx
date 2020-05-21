@@ -1,4 +1,5 @@
 import * as React from "react"
+import {RGBCanvas} from "./rgbcanvas"
 
 async function sleep(ms:number):Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -31,11 +32,13 @@ class RgbCanv extends React.Component<MyProps>{
     
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
-        this.uri = "/colourcam.png";
-        this.ctx = canvas.getContext("2d")
-        this.img = document.createElement("img");
-        this.img.id = "bob";
-        this.draw();
+
+        let c:RGBCanvas = new RGBCanvas(canvas, "/colourcam.png");
+        c.draw();
+        //this.ctx = canvas.getContext("2d")
+        //this.img = document.createElement("img");
+        //this.img.id = "bob";
+        //this.draw();
     }
 
     render() { 

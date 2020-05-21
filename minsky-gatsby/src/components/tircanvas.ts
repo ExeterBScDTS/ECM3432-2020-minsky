@@ -85,13 +85,6 @@ class TIRCanvas {
     window.requestAnimationFrame(() => this.draw());
   }
 
-  static main(selector:string, uri:string) {
-
-    //let p = new Palette(512);
-    //let c = <HTMLCanvasElement> document.querySelector(selector);
-    //let t = new TIRCanvas(c,p,uri);
-    //t.draw();
-  }
 }
 
 export {TIRCanvas}
