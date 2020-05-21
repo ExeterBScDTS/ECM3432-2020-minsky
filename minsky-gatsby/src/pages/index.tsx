@@ -36,10 +36,9 @@ const IndexPage = () => {
     <Layout>
 
       <div className="row" style={{ visibility: "hidden", height: "0px" }} >
-        <RgbCanv id="rgb" />
       </div>
       <div className="row">
-        <Composite id="comp" rgb="rgb" callback={fn} controls="off" />
+        <Composite id="comp" callback={fn} controls="off" />
         <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax} />
       </div>
     </Layout>

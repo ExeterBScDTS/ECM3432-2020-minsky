@@ -3,7 +3,7 @@ import * as React from "react"
 import Slider from 'react-input-slider'
 import { TIRCanvas } from "./tircanvas"
 import { Palette } from "./palette"
-import RgbCanv, { RGBCanvas } from "./rgbcanv"
+import { RGBCanvas } from "./rgbcanvas"
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -11,18 +11,17 @@ async function sleep(ms: number): Promise<number> {
 
 export interface MyProps {
     id: string
-    rgb: string
     callback: (v:number,min:number,max:number) => void
     controls: string
 }
 
 class Composite extends React.Component<MyProps>{
 
-    private width = 640;
-    private height = 480;
-    private ctx: CanvasRenderingContext2D;
-    private rgb: HTMLImageElement;
-    private tirC: TIRCanvas;
+    private width = 640
+    private height = 480
+    private ctx: CanvasRenderingContext2D
+    private rgbC: RGBCanvas
+    private tirC: TIRCanvas
 
     state = {
         x: 50, y: 50, scale: 1.7,
@@ -67,7 +66,7 @@ class Composite extends React.Component<MyProps>{
         this.ctx.restore();
         this.ctx.save();
         this.ctx.globalAlpha = 0.5;
-        this.ctx.drawImage(this.rgb, 0, 0, 640, 480);
+        this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 640, 480);
         this.ctx.restore();
     }
 
@@ -83,18 +82,25 @@ class Composite extends React.Component<MyProps>{
 
     componentDidMount() {
 
+
+        const rgb_canv = document.createElement('canvas')
+        rgb_canv.id = 'dummyC'
+        rgb_canv.height = 240
+        rgb_canv.width = 320
         const tir_canv = document.createElement('canvas')
-        tir_canv.id = 'dummy'
+        tir_canv.id = 'dummyT'
         tir_canv.height = 240
         tir_canv.width = 320
         let p = new Palette(200)
         this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback)
         this.tirC.draw()
 
+        this.rgbC = new RGBCanvas(rgb_canv, "/colourcam.png")
+        this.rgbC.draw()
+
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
-        this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
-        //this.tir = document.getElementById(this.props.tir) as HTMLImageElement;
+        //this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
         if (this.props.controls == "off") {
             this.setState({ vis: "hidden" });
         }

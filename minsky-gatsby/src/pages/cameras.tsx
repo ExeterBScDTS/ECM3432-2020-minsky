@@ -42,7 +42,7 @@ const CamerasPage = () => {
         <Link className="btn btn-outline-secondary" to="/updates">Check for updates</Link>
       </div>
       <div className="row">
-        <Composite id="comp" rgb="rgb" controls="on" callback={fn} />
+        <Composite id="comp" controls="on" callback={fn} />
         <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax}/>
       </div>
       <div style={{ visibility: "visible" }}>
