@@ -31,15 +31,20 @@ const MobilePage = () => {
     setPlotMax(max)
   }
 
+  // <TemperaturePlot id="plot" width={100} height={200} pal={200} latest={plotData} min={plotMin} max={plotMax} />
   return (
 
     <Layout>
 
-      <div className="row" style={{ visibility: "hidden", height: "0px" }} ></div>
       <div className="row">
-        <Composite id="comp" callback={fn} controls="off" />
-        <TemperaturePlot id="plot" width={300} height={400} pal={200} latest={plotData} min={plotMin} max={plotMax} />
+      <div className="col-md-8">
+        <Composite id="comp" width={480} height={640} callback={fn} controls="off" />
+        </div>
+        <div className="col-md-4">
+        
       </div>
+      </div>
+
     </Layout>
   )
 }

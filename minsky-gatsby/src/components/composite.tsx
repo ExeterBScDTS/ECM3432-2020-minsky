@@ -12,6 +12,8 @@ async function sleep(ms: number): Promise<number> {
 
 export interface MyProps {
     id: string
+    width: number
+    height: number
     callback: (v:number,min:number,max:number) => void
     controls: string
 }
@@ -133,19 +135,21 @@ class Composite extends React.Component<MyProps>{
 
     render() {
 
+        // className="image_cw"
         return (
             <>
                 <div>
                     <div>
                         <Slider axis="y" y={this.state.y} onChange={
                             ({ x, y }) => { this.setState({ y: y }) }
-                        } style={{ height: 640, visibility: this.state.vis }} />
-                        <canvas onMouseMove={this._onMouseMove.bind(this)} className="image_cw" ref="canvas" width={640} height={480} />
+                        } style={{ height:this.props.height, visibility: this.state.vis }} />
+                        <canvas onMouseMove={this._onMouseMove.bind(this)}   ref="canvas" 
+                        width={this.props.height} height={this.props.width} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.x} onChange={
                             ({ x, y }) => { this.setState({ x: x }) }
-                        } style={{visibility: this.state.vis, left: 30, width: 480}} />
+                        } style={{visibility: this.state.vis, left: 30, width: this.props.width}} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.02} onChange={
