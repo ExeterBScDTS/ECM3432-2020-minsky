@@ -62,15 +62,14 @@ class Composite extends React.Component<MyProps>{
         mov_y -= tir_w / 2
         mov_x -= tir_h / 2
         this.ctx.save()
-        this.ctx.clearRect(0, 0, 640, 480)
+        this.ctx.clearRect(0, 0, 480, 640)
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
-        this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);
-        this.ctx.restore();
-        this.ctx.save();
-        this.ctx.globalAlpha = 0.5;
-        this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 640, 480);
-        this.ctx.restore();
+        this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h)
+        this.ctx.restore()
+        this.ctx.save()
+        this.ctx.globalAlpha = 0.5
+        this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 480, 640)
     }
 
     private async autoRefresh() {
@@ -88,14 +87,17 @@ class Composite extends React.Component<MyProps>{
 
         const rgb_canv = document.createElement('canvas')
         rgb_canv.id = 'dummyC'
-        rgb_canv.height = 240
-        rgb_canv.width = 320
+        rgb_canv.height = 320
+        rgb_canv.width = 240
         const tir_canv = document.createElement('canvas')
         tir_canv.id = 'dummyT'
-        tir_canv.height = 240
-        tir_canv.width = 320
+        tir_canv.height = 320
+        tir_canv.width = 240
         let p = new Palette(200)
         this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback)
+        //const ctx = this.tirC.getCanv().getContext('2d')
+        //ctx.rotate(Math.PI / 20)
+        //ctx.translate(0, -240)
         this.tirC.draw()
 
         this.rgbC = new RGBCanvas(rgb_canv, "/colourcam.png")
@@ -103,7 +105,6 @@ class Composite extends React.Component<MyProps>{
 
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
-        //this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
         if (this.props.controls == "off") {
             this.setState({ vis: "hidden" });
         }
@@ -144,7 +145,7 @@ class Composite extends React.Component<MyProps>{
                             ({ x, y }) => { this.setState({ y: y }) }
                         } style={{ height:this.props.height, visibility: this.state.vis }} />
                         <canvas onMouseMove={this._onMouseMove.bind(this)}   ref="canvas" 
-                        width={this.props.height} height={this.props.width} />
+                        width={this.props.width} height={this.props.height} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.x} onChange={
