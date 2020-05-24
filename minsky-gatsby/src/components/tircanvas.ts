@@ -20,6 +20,9 @@ class TIRCanvas {
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string, callback: (v:number,min:number,max:number) => void) {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
+    this.ctx.translate(120,  -160)
+    this.ctx.rotate(Math.PI / 2)
+    this.ctx.translate(160, -120)
     this.pal = palette
     this.uri = uri
     this.callback = callback

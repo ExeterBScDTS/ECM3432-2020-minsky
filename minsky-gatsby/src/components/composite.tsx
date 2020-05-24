@@ -57,8 +57,8 @@ class Composite extends React.Component<MyProps>{
         let mov_y = (this.state.y) * this.height / 100
         let mov_x = (this.state.x) * this.width / 100
 
-        let tir_w = 320 * (this.state.scale)
-        let tir_h = 240 * (this.state.scale)
+        let tir_w = 240 * (this.state.scale)
+        let tir_h = 320 * (this.state.scale)
         mov_y -= tir_h / 2
         mov_x -= tir_w / 2
         this.ctx.save()
