@@ -14,14 +14,14 @@ export interface MyProps {
     id: string
     width: number
     height: number
-    callback: (v:number,min:number,max:number) => void
+    callback: (v: number, min: number, max: number) => void
     controls: string
 }
 
 class Composite extends React.Component<MyProps>{
 
-    private width = 640
-    private height = 480
+    private width = 480
+    private height = 640
     private ctx: CanvasRenderingContext2D
     private rgbC: RGBCanvas
     private tirC: TIRCanvas
@@ -33,39 +33,39 @@ class Composite extends React.Component<MyProps>{
         vis: "visible" as VisibilityState
     }
 
-    private tir_xy(x:number,y:number) : {x:number,y:number} {
-        let mov_y = (this.state.y) * this.width / 100
-        let mov_x = (this.state.x) * this.height / 100
+    private tir_xy(x: number, y: number): { x: number, y: number } {
+        let mov_y = (this.state.y) * this.height / 100
+        let mov_x = (this.state.x) * this.width / 100
         let tir_w = 320 * (this.state.scale)
         let tir_h = 240 * (this.state.scale)
-        mov_y -= tir_w / 2
-        mov_x -= tir_h / 2
-        return {x:(x-mov_x)/tir_h,y:(y-mov_y)/tir_w}
-      }
+        mov_y -= tir_h / 2
+        mov_x -= tir_w / 2
+        return { x: (x - mov_x) / tir_w, y: (y - mov_y) / tir_h }
+    }
 
     _onMouseMove(e: MouseEvent) {
         var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
         //console.log("_onMouseMove",x,y, this.tir_xy(x,y))
-        this.tirC.setCursor(this.tir_xy(x,y))
+        this.tirC.setCursor(this.tir_xy(x, y))
     }
 
 
     private draw() {
 
-        let mov_y = (this.state.y) * this.width / 100
-        let mov_x = (100 - this.state.x) * this.height / 100
+        let mov_y = (this.state.y) * this.height / 100
+        let mov_x = (this.state.x) * this.width / 100
 
         let tir_w = 320 * (this.state.scale)
         let tir_h = 240 * (this.state.scale)
-        mov_y -= tir_w / 2
-        mov_x -= tir_h / 2
+        mov_y -= tir_h / 2
+        mov_x -= tir_w / 2
         this.ctx.save()
         this.ctx.clearRect(0, 0, 480, 640)
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
-        this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h)
+        this.ctx.drawImage(this.tirC.getCanv(), mov_x, mov_y, tir_w, tir_h)
         this.ctx.restore()
         this.ctx.save()
         this.ctx.globalAlpha = 0.5
@@ -78,7 +78,7 @@ class Composite extends React.Component<MyProps>{
         window.requestAnimationFrame(() => this.autoRefresh());
     }
 
-    tir_cb(v:number){
+    tir_cb(v: number) {
         console.log("CENTRE V", v)
     }
 
@@ -143,21 +143,21 @@ class Composite extends React.Component<MyProps>{
                     <div>
                         <Slider axis="y" y={this.state.y} onChange={
                             ({ x, y }) => { this.setState({ y: y }) }
-                        } style={{ height:this.props.height, visibility: this.state.vis }} />
-                        <canvas onMouseMove={this._onMouseMove.bind(this)}   ref="canvas" 
-                        width={this.props.width} height={this.props.height} />
+                        } style={{ height: this.props.height, visibility: this.state.vis }} />
+                        <canvas onMouseMove={this._onMouseMove.bind(this)} ref="canvas"
+                            width={this.props.width} height={this.props.height} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.x} onChange={
                             ({ x, y }) => { this.setState({ x: x }) }
-                        } style={{visibility: this.state.vis, left: 30, width: this.props.width}} />
+                        } style={{ visibility: this.state.vis, left: 0, width: this.props.width }} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.02} onChange={
                             ({ x, y }) => { this.setState({ scale: x }) }
-                        } style={{ left: 30, width: 160, visibility: this.state.vis }} />
+                        } style={{ left: 0, width: 160, visibility: this.state.vis }} />
                     </div>
-                    <div style={{visibility: this.state.vis}}>
+                    <div style={{ visibility: this.state.vis }}>
                         Min <Slider axis="x" x={this.state.min}
                             onChange={({ x, y }) => {
                                 this.setState({ min: x })
@@ -168,7 +168,7 @@ class Composite extends React.Component<MyProps>{
                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
-                    <div style={{visibility: this.state.vis}}>
+                    <div style={{ visibility: this.state.vis }}>
                         Max <Slider axis="x" x={this.state.max}
                             onChange={({ x, y }) => {
                                 this.setState({ max: x })
@@ -179,7 +179,7 @@ class Composite extends React.Component<MyProps>{
                             }}
                             style={{ left: 30, width: 160 }} />
                     </div>
-                    <div style={{visibility: this.state.vis}}>
+                    <div style={{ visibility: this.state.vis }}>
                         <form
                             onSubmit={event => {
                                 event.preventDefault()
