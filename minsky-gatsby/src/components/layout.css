@@ -13,5 +13,10 @@
     cursor: crosshair;
 }
 
+.image {
+    cursor: crosshair;
+}
+
+
 @import '../dist/vendor/bootstrap/css/bootstrap.min.css'
 

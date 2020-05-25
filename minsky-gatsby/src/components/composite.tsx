@@ -36,8 +36,8 @@ class Composite extends React.Component<MyProps>{
     private tir_xy(x: number, y: number): { x: number, y: number } {
         let mov_y = (this.state.y) * this.height / 100
         let mov_x = (this.state.x) * this.width / 100
-        let tir_w = 320 * (this.state.scale)
-        let tir_h = 240 * (this.state.scale)
+        let tir_w = 240 * (this.state.scale)
+        let tir_h = 320 * (this.state.scale)
         mov_y -= tir_h / 2
         mov_x -= tir_w / 2
         return { x: (x - mov_x) / tir_w, y: (y - mov_y) / tir_h }
@@ -144,7 +144,7 @@ class Composite extends React.Component<MyProps>{
                         <Slider axis="y" y={this.state.y} onChange={
                             ({ x, y }) => { this.setState({ y: y }) }
                         } style={{ height: this.props.height, visibility: this.state.vis }} />
-                        <canvas onMouseMove={this._onMouseMove.bind(this)} ref="canvas"
+                        <canvas onMouseMove={this._onMouseMove.bind(this)} className="image" ref="canvas"
                             width={this.props.width} height={this.props.height} />
                     </div>
                     <div>
