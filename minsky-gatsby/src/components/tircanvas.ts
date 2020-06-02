@@ -70,7 +70,7 @@ class TIRCanvas {
       let x = (this.data_w-1) - ~~(this.cursor.x * this.data_w)
       let y = ~~(this.cursor.y * this.data_h)
       let value_at_cursor = tir[this.data_h*x + y]
-      console.log("TIRC xyv", x, y, value_at_cursor)
+      //console.log("TIRC xyv", x, y, value_at_cursor)
       this.callback(value_at_cursor,this.mint,this.maxt)
     }catch(e){
       console.log("No callback", e)

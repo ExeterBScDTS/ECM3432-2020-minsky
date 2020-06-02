@@ -33,6 +33,7 @@ class Composite extends React.Component<MyProps>{
         vis: "visible" as VisibilityState
     }
 
+    /*
     private tir_xy(x: number, y: number): { x: number, y: number } {
         let mov_y = (this.state.y) * this.height / 100
         let mov_x = (this.state.x) * this.width / 100
@@ -42,13 +43,14 @@ class Composite extends React.Component<MyProps>{
         mov_x -= tir_w / 2
         return { x: (x - mov_x) / tir_w, y: (y - mov_y) / tir_h }
     }
-
+    */
+ 
     _onMouseMove(e: MouseEvent) {
         var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
-        //console.log("_onMouseMove",x,y, this.tir_xy(x,y))
-        this.tirC.setCursor(this.tir_xy(x, y))
+        //console.log("_onMouseMove",x,y, rect)
+        this.tirC.setCursor({x: x/rect.width,y:y/rect.height})
     }
 
 
@@ -61,15 +63,18 @@ class Composite extends React.Component<MyProps>{
         let tir_h = 320 * (this.state.scale)
         mov_y -= tir_h / 2
         mov_x -= tir_w / 2
+        let scale = this.state.scale - 1
         this.ctx.save()
         this.ctx.clearRect(0, 0, 480, 640)
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
-        this.ctx.drawImage(this.tirC.getCanv(), mov_x, mov_y, tir_w, tir_h)
+        //this.ctx.drawImage(this.tirC.getCanv(), mov_x, mov_y, tir_w, tir_h)
+        this.ctx.drawImage(this.tirC.getCanv(), 0, 0, 480, 640)
         this.ctx.restore()
         this.ctx.save()
         this.ctx.globalAlpha = 0.5
-        this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 480, 640)
+        //this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 480, 640)
+        this.ctx.drawImage(this.rgbC.getCanv(), -mov_x, -mov_y, 480/scale, 640/scale)
     }
 
     private async autoRefresh() {

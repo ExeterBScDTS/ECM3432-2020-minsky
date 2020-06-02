@@ -3,7 +3,8 @@ import * as React from "react"
 import Slider from 'react-input-slider'
 import { TIRCanvas } from "./tircanvas"
 import { Palette } from "./palette"
-
+import { RGBCanvas } from "./rgbcanvas"
+import { CSSProperties } from "react"
 
 async function sleep(ms: number): Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -11,71 +12,64 @@ async function sleep(ms: number): Promise<number> {
 
 export interface MyProps {
     id: string
-    rgb: string
-    //tir: string;
-    callback: (v:number,min:number,max:number) => void
+    width: number
+    height: number
+    callback: (v: number, min: number, max: number) => void
     controls: string
 }
 
 class Composite extends React.Component<MyProps>{
 
-    private width = 640;
-    private height = 480;
-    private ctx: CanvasRenderingContext2D;
-    private rgb: HTMLImageElement;
-    //private tir: HTMLImageElement;
-    private tirC: TIRCanvas;
-    //private tir_width = 320;
-    //private tir_height = 240;
-    //private uri: string;
-    //private mov_x: number = 10;
-    //private mov_y: number = 10;
+    private width = 480
+    private height = 640
+    private ctx: CanvasRenderingContext2D
+    private rgbC: RGBCanvas
+    private tirC: TIRCanvas
 
     state = {
         x: 50, y: 50, scale: 1.7,
         min: 0,
         max: 50,
-        vis: "visible"
+        vis: "visible" as VisibilityState
     }
 
-    private tir_xy(x:number,y:number) : {x:number,y:number} {
-        let mov_y = (this.state.y) * this.width / 100
-        let mov_x = (this.state.x) * this.height / 100
-        let tir_w = 320 * (this.state.scale)
-        let tir_h = 240 * (this.state.scale)
-        mov_y -= tir_w / 2
-        mov_x -= tir_h / 2
-        return {x:(x-mov_x)/tir_h,y:(y-mov_y)/tir_w}
-      }
+    private tir_xy(x: number, y: number): { x: number, y: number } {
+        let mov_y = (this.state.y) * this.height / 100
+        let mov_x = (this.state.x) * this.width / 100
+        let tir_w = 240 * (this.state.scale)
+        let tir_h = 320 * (this.state.scale)
+        mov_y -= tir_h / 2
+        mov_x -= tir_w / 2
+        return { x: (x - mov_x) / tir_w, y: (y - mov_y) / tir_h }
+    }
 
     _onMouseMove(e: MouseEvent) {
         var rect = (e.target as Element).getBoundingClientRect()
         let x = e.clientX - ~~rect.left
         let y = e.clientY - ~~rect.top
         //console.log("_onMouseMove",x,y, this.tir_xy(x,y))
-        this.tirC.setCursor(this.tir_xy(x,y))
+        this.tirC.setCursor(this.tir_xy(x, y))
     }
 
 
     private draw() {
 
-        let mov_y = (this.state.y) * this.width / 100
-        let mov_x = (100 - this.state.x) * this.height / 100
+        let mov_y = (this.state.y) * this.height / 100
+        let mov_x = (this.state.x) * this.width / 100
 
-        let tir_w = 320 * (this.state.scale)
-        let tir_h = 240 * (this.state.scale)
-        mov_y -= tir_w / 2
-        mov_x -= tir_h / 2
+        let tir_w = 240 * (this.state.scale)
+        let tir_h = 320 * (this.state.scale)
+        mov_y -= tir_h / 2
+        mov_x -= tir_w / 2
         this.ctx.save()
-        this.ctx.clearRect(0, 0, 640, 480)
+        this.ctx.clearRect(0, 0, 480, 640)
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
-        this.ctx.drawImage(this.tirC.getCanv(), mov_y, mov_x, tir_w, tir_h);
-        this.ctx.restore();
-        this.ctx.save();
-        this.ctx.globalAlpha = 0.5;
-        this.ctx.drawImage(this.rgb, 0, 0, 640, 480);
-        this.ctx.restore();
+        this.ctx.drawImage(this.tirC.getCanv(), mov_x, mov_y, tir_w, tir_h)
+        this.ctx.restore()
+        this.ctx.save()
+        this.ctx.globalAlpha = 0.5
+        this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 480, 640)
     }
 
     private async autoRefresh() {
@@ -84,24 +78,33 @@ class Composite extends React.Component<MyProps>{
         window.requestAnimationFrame(() => this.autoRefresh());
     }
 
-    tir_cb(v:number){
+    tir_cb(v: number) {
         console.log("CENTRE V", v)
     }
 
     componentDidMount() {
 
+
+        const rgb_canv = document.createElement('canvas')
+        rgb_canv.id = 'dummyC'
+        rgb_canv.height = 320
+        rgb_canv.width = 240
         const tir_canv = document.createElement('canvas')
-        tir_canv.id = 'dummy'
-        tir_canv.height = 240
-        tir_canv.width = 320
+        tir_canv.id = 'dummyT'
+        tir_canv.height = 320
+        tir_canv.width = 240
         let p = new Palette(200)
         this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback)
+        //const ctx = this.tirC.getCanv().getContext('2d')
+        //ctx.rotate(Math.PI / 20)
+        //ctx.translate(0, -240)
         this.tirC.draw()
+
+        this.rgbC = new RGBCanvas(rgb_canv, "/colourcam.png")
+        this.rgbC.draw()
 
         const canvas: HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
         this.ctx = canvas.getContext("2d")
-        this.rgb = document.getElementById(this.props.rgb) as HTMLImageElement;
-        //this.tir = document.getElementById(this.props.tir) as HTMLImageElement;
         if (this.props.controls == "off") {
             this.setState({ vis: "hidden" });
         }
@@ -132,24 +135,27 @@ class Composite extends React.Component<MyProps>{
     }
 
     render() {
+
+        // className="image_cw"
         return (
             <>
                 <div>
                     <div>
                         <Slider axis="y" y={this.state.y} onChange={
                             ({ x, y }) => { this.setState({ y: y }) }
-                        } style={{ height: 640, visibility: this.state.vis }} />
-                        <canvas onMouseMove={this._onMouseMove.bind(this)} className="image_cw" ref="canvas" width={640} height={480} />
+                        } style={{ height: this.props.height, visibility: this.state.vis }} />
+                        <canvas onMouseMove={this._onMouseMove.bind(this)} className="image" ref="canvas"
+                            width={this.props.width} height={this.props.height} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.x} onChange={
                             ({ x, y }) => { this.setState({ x: x }) }
-                        } style={{ left: 30, width: 480, visibility: this.state.vis }} />
+                        } style={{ visibility: this.state.vis, left: 0, width: this.props.width }} />
                     </div>
                     <div>
                         <Slider axis="x" x={this.state.scale} xmin={1.4} xmax={2.0} xstep={0.02} onChange={
                             ({ x, y }) => { this.setState({ scale: x }) }
-                        } style={{ left: 30, width: 160, visibility: this.state.vis }} />
+                        } style={{ left: 0, width: 160, visibility: this.state.vis }} />
                     </div>
                     <div style={{ visibility: this.state.vis }}>
                         Min <Slider axis="x" x={this.state.min}
@@ -201,8 +207,6 @@ class Composite extends React.Component<MyProps>{
                                     .catch((error) => {
                                         console.error('Error:', error);
                                     });
-
-
                             }}>
                             <input type="submit" value="save" />
                         </form>
