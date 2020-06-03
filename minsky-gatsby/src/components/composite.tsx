@@ -20,8 +20,6 @@ export interface MyProps {
 
 class Composite extends React.Component<MyProps>{
 
-    private width = 480
-    private height = 640
     private ctx: CanvasRenderingContext2D
     private rgbC: RGBCanvas
     private tirC: TIRCanvas
@@ -56,8 +54,8 @@ class Composite extends React.Component<MyProps>{
 
     private draw() {
 
-        let mov_y = (this.state.y) * this.height / 100
-        let mov_x = (this.state.x) * this.width / 100
+        let mov_y = (this.state.y) * this.props.height / 100
+        let mov_x = (this.state.x) * this.props.width / 100
 
         let tir_w = 240 * (this.state.scale)
         let tir_h = 320 * (this.state.scale)
@@ -69,12 +67,12 @@ class Composite extends React.Component<MyProps>{
         this.tirC.setMin(this.state.min)
         this.tirC.setMax(this.state.max)
         //this.ctx.drawImage(this.tirC.getCanv(), mov_x, mov_y, tir_w, tir_h)
-        this.ctx.drawImage(this.tirC.getCanv(), 0, 0, 480, 640)
+        this.ctx.drawImage(this.tirC.getCanv(), 0, 0, this.props.width, this.props.height)
         this.ctx.restore()
         this.ctx.save()
         this.ctx.globalAlpha = 0.5
         //this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 480, 640)
-        this.ctx.drawImage(this.rgbC.getCanv(), -mov_x, -mov_y, 480/scale, 640/scale)
+        this.ctx.drawImage(this.rgbC.getCanv(), -mov_x, -mov_y, this.props.width/scale, this.props.height/scale)
     }
 
     private async autoRefresh() {
@@ -100,9 +98,6 @@ class Composite extends React.Component<MyProps>{
         tir_canv.width = 240
         let p = new Palette(200)
         this.tirC = new TIRCanvas(tir_canv, p, "/tir.json", this.props.callback)
-        //const ctx = this.tirC.getCanv().getContext('2d')
-        //ctx.rotate(Math.PI / 20)
-        //ctx.translate(0, -240)
         this.tirC.draw()
 
         this.rgbC = new RGBCanvas(rgb_canv, "/colourcam.png")
