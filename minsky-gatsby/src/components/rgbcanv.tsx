@@ -1,4 +1,5 @@
 import * as React from "react"
+import {RGBCanvas} from "./rgbcanvas"
 
 async function sleep(ms:number):Promise<number> {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -20,7 +21,7 @@ class RgbCanv extends React.Component<MyProps>{
         this.img.src = this.uri + "#" + new Date().getTime();
         this.img.onload = () => {
             // image is 640x480
-            // These values could bre read as img.naturalHeight and img.naturalWidth
+            // These values could be read as img.naturalHeight and img.naturalWidth
             // 
             // Scale image
             // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
@@ -31,11 +32,13 @@ class RgbCanv extends React.Component<MyProps>{
     
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
-        this.uri = "/colourcam.png";
-        this.ctx = canvas.getContext("2d")
-        this.img = document.createElement("img");
-        this.img.id = "bob";
-        this.draw();
+
+        let c:RGBCanvas = new RGBCanvas(canvas, "/colourcam.png");
+        c.draw();
+        //this.ctx = canvas.getContext("2d")
+        //this.img = document.createElement("img");
+        //this.img.id = "bob";
+        //this.draw();
     }
 
     render() { 

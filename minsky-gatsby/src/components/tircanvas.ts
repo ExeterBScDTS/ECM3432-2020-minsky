@@ -20,6 +20,9 @@ class TIRCanvas {
   constructor(canvas: HTMLCanvasElement, palette: Palette , uri: string, callback: (v:number,min:number,max:number) => void) {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
+    this.ctx.translate(120,  -160)
+    this.ctx.rotate(Math.PI / 2)
+    this.ctx.translate(160, -120)
     this.pal = palette
     this.uri = uri
     this.callback = callback
@@ -67,7 +70,7 @@ class TIRCanvas {
       let x = (this.data_w-1) - ~~(this.cursor.x * this.data_w)
       let y = ~~(this.cursor.y * this.data_h)
       let value_at_cursor = tir[this.data_h*x + y]
-      console.log("TIRC xyv", x, y, value_at_cursor)
+      //console.log("TIRC xyv", x, y, value_at_cursor)
       this.callback(value_at_cursor,this.mint,this.maxt)
     }catch(e){
       console.log("No callback", e)
@@ -85,13 +88,6 @@ class TIRCanvas {
     window.requestAnimationFrame(() => this.draw());
   }
 
-  static main(selector:string, uri:string) {
-
-    //let p = new Palette(512);
-    //let c = <HTMLCanvasElement> document.querySelector(selector);
-    //let t = new TIRCanvas(c,p,uri);
-    //t.draw();
-  }
 }
 
 export {TIRCanvas}

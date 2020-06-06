@@ -15,13 +15,7 @@ export interface MyProps {
 
 class TirCanv extends React.Component<MyProps> {
 
-
-    /*
-    blx(v:number){
-        console.log("blx")
-    }
-    */
-
+    
     componentDidMount() {
         const canvas:HTMLCanvasElement = this.refs.canvas as HTMLCanvasElement;
 
