@@ -72,7 +72,7 @@ class Composite extends React.Component<MyProps>{
         this.ctx.save()
         this.ctx.globalAlpha = 0.5
         //this.ctx.drawImage(this.rgbC.getCanv(), 0, 0, 480, 640)
-        this.ctx.drawImage(this.rgbC.getCanv(), -mov_x, -mov_y, this.props.width/scale, this.props.height/scale)
+        this.ctx.drawImage(this.rgbC.getCanv(), mov_x, mov_y, this.props.width/scale, this.props.height/scale)
     }
 
     private async autoRefresh() {
