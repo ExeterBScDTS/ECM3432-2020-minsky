@@ -27,3 +27,4 @@ npm-debug.log
 minsky-one/src/main/webapp/static/
 node_modules
 minsky-one/test.db
+minsky-gatsby/package-lock.json

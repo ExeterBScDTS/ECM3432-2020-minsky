@@ -28,6 +28,8 @@ To rebuild the Java backend.
 cd minsky-one
 mvn compile
 mvn package
+# To run in test 
+mvn jetty:run
 ```
 
 See <https://code.visualstudio.com/docs/java/java-tutorial> and <https://maven.apache.org/install.html> if Java SDK or Maven are not installed.
@@ -36,11 +38,14 @@ To install all front-end dependencies. Requires **node** and **npm**.
 
 <https://nodejs.org/en/download/>
 
-``sh
+```sh
 npm install -g yarn
 cd minksy-gatsby
 yarn install
 yarn build
+```
+
+Linux/Mac users might need this <https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally>
 
 ## Check builds
 
