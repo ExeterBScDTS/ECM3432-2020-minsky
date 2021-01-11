@@ -21,16 +21,26 @@ then main.
 
 ## Consider also
 
-```sh
-cd minsky-gatsby
-yarn build
-```
+
+To rebuild the Java backend.
 
 ```sh
 cd minsky-one
 mvn compile
 mvn package
 ```
+
+See <https://code.visualstudio.com/docs/java/java-tutorial> and <https://maven.apache.org/install.html> if Java SDK or Maven are not installed.
+
+To install all front-end dependencies. Requires **node** and **npm**.
+
+<https://nodejs.org/en/download/>
+
+``sh
+npm install -g yarn
+cd minksy-gatsby
+yarn install
+yarn build
 
 ## Check builds
 
